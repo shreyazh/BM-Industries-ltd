@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAvCAYAAABTy8xRAAANpklEQVR4nO1afWxcx3H/ze5774488o6UZVoyK1mRSMkSCVsOHRuJ3FJSLLuwqjZwc0SjNCmaxHZbwAbaqm1QtD2ekzqwhRiR4Y+6BmrYrj/CK+AkDmIkciPRsGPZFQ1LKkWJimRLjkiKlkgeyeN9vLcz/ePeUcfTHb9koC2gARYHct/ufOzsb2dmF7hCV+gKFUhEyG9KRFRXV5cWkUpNiQgBoP9tuS+HCABERANgIpLFTOKPJwBmPnOIgNBZ3nAUBy9Ghoq8YlBlOzohRJAZQjQ1NQUefvjhyJo1a0KpVKpu+fLlTiqVqluyZAkikQgCgQAGBwcxPDzsRiKRc6dPnz5/++23XwDgXVTuMo0JEAGLGruYuejcuXM1tm0/allWq1JqudZ6ida6SmttK1XeeABgjIHneROeZwaz2cyRycnJvYcPH/7pjh07zgJALBZT8Xh8ejULwsi9bTbs9CtQ6hoYYUAUCAYBrYdH3ZevefbYExKNakokzGUpH4spisf5k29c/3dL6+wdyBoDgQaRgaU0XO6lJ3vvIxG5GsBZAHbpHP5vOZck4FLXymQyo+Pj4892d3c/2NHRkRQRRUQ8wwD3NwXAgQEE9RJ4chFBFCGTNtne8+m1bV2nPkYnaLHbQWJQ6IS807FmTdvVgT4naFlguahVQAGT3mF6svdGBUCYeQSA8ZsAkCKA02WaEpHCdMzMBoAXDAbrGxoa/mr79u1v9/X1rSIiFpFybjQBlw08duGygcsGGZMLVunAqrCzmwiCo9HFg+vRKBFB1oXth5ygZSFjctN8PMkhxwagScBfRaXUtGK+0kREBQW9co2IjG8k5Y+3fGO61dXVLStWrPh5V1fXEuStWaKMKAAaUmRUgoOsMfUhu6Pvq+s2UyJhJBrVC9VdotCUSJgjO9duilRbX0bOGBCcaT6Qwq+aNsAsRL5i5Zr2ga7YTUkpZQPIhUKhtbfddlvc3wJz8SmID6WAxmr1g/Z2WEUyLICiAIDrqvUj2iKadv0KZFX4PwNQruueHB1N/iQQsC9MTU1lmRk1NTUWM19n23ZbTU3N53wBpURQCwDX19d/9ZlnnokR0YjEYgrx+BzoTho5Y2pr7Rufu675z+j5xOPSFdXUMT9A3NfeblEi4Z36+tqO2lrrC/nVp1m9iERkKYA+AEuLFPF8Jf6NiL5ZafAHH3ywtbm5+fHq6ur18I1W1M0A1LFjv96yfn3zfhHRRGTyIOicgFYr4AmDZnoHC0RZJJmcjP3sXHr93TecOt8JID4HIApAiIEe/flvBe67ofa/Q1XWZ+CylM4PwMBWGjk+QE/2fn4u1wyIiCUiQf+3uKmNGzf+8q23Dm7PZrNJXPSEYgNITU1wBQD09PTMaxsoArHHEgzpJV+os79LcXBnyzwAMdauKQ7+8trqB0K19mq4xpRR/lJ+c/QLERVAr7SxiDh33tn+4fj4+GvwI8GS8ZROp0NzCl8qFJFC1pirQtY3D++8vk11JExXFBVdORaDArr5xzs+c01DtfVt5JgZs7v+NK+FCldCLCIqm82eLNNHABAOh4cAoK1tYtb9zzITTMEC21ZqZTV+IACiPriVo86WKFEcfMtVTiwYsupgmBXl+bOAIZWjwcs1AIiIHccJl+nSnufJ4ODgCQBA4pPyQggYtsJo1ryd9XgI2j9+iTSyxkRqnduO7Vz7tUrHYlcUGh0JPhBt2nBVyPoWsoYLwGdEzOCUeZVn2UCLNoAf8xsAVigU2lE8HzMzAE6n0x8+9NBDJ0SEEI2WBzGCQBEsTeNjOd4LWwEi/lYigmFeGba+98LvNoWxISFScixGEQUB0hS2H7ED2gaLQCCwFXIGhzPM/6UCmgApe5LMGQf4imoR0fv27SsAoCYiQ0QyODj4VCgUakLRKaCU8gCooaGhxxKJRA6ABlVYBsm7u0NYPZQxCbgMgJRvHAWPuSpkNW5dpv6B4mB0RadlLuQM7/9R07YlIWs7soVjTxiWwicZ7grbZEERKm2DuQyQ8xXNEpHZsmVLAQDNwYOHPjsyMvKLZcuWfYuZCyEvA8gBcCYmJvbec889T/j5QOVznEDwGLai1e8MuEdSGXNEHKWmMSG/FfjqavuB96Lr1iGa4JIU11pdaz1CCjJ9CBFpk/b4V4Pui1VKrYFUhp9KgVBhuVaKyDYAemBgIMDMEdu2l1qWdXtNTc2dgUBAATB+KFwwqDM6Orb30KEP7t6/f39B8dJAaSYvAVuODtzUYFePZPmZUFg9RjnDvicQWNgOWoGmiHmUCNslGlUSG7YonvD6v7buG5FaZyMyXmH1DRytJsa9977yi5MfT9y7fh1Y8oZegAEKCn3Rb7j22mvLfWf8b4WZJzOZzImxsbHnt23b9tTRo0dzIkLzqwsIQ5NaVWPd+H7Oe64h5T4csFSAjYgiUN4LPFMfsu/q3bn2D+ilxI8lBvVs+3V111apB2HYTzaRd3UiSnr8eN66WJaPSKisCeaMA5B3a/aVLSRDhaxR+30YHBz8z3ffffeBxsbGPQXl51a8iAsBVZZqvevFX4+fn/K+B0cpBeEZ3yigsVr/EwBFcciWVYE/DNXYjXDZD3rEIKCtsfHcoWefO/7yi9tX1itCvZ8PlJVnIacAAVDMXJw1FuagxsbGL7W3t7+VTCaP9Pf3/zkRCRHJQgwRdkgJQHs/yu5OTbh9cLRikYtYkGOurdI3Hdu59vMApN5RX4eIXHRvAhvBiXGzKw5wveOECHBm4zmfbFAVN6VUoU5QSJULLi5KKYTD4dbm5uYnx8bGXjtz5kwVUC4dLk8MYQLkT7tPZ86lvQcgIFW8hURYOYquCak/frp9+dJqR2+CyxCQhohBQOsLk+6rt3SdeAMAXM+4QOUgaDYDFAYlARxj5uMAjqVSqTMTE6nhbDabwsVUmZDfBiQihRjAjUQiv1dbW/vq5s2b8wXTeSBBQRi5vymw5oUTb4xOul0Iaj0dFxBpuIyQRXf9/prIP1u20mAIAQJFlMuY9EcZ3iUy/xS6kgEK6P0aEa1XSrUS0fqWlpZ13/lOvOnNN99c29vb+9sDAwPfzWQy55HfGkJEUPlCog0gV1dXd+cLL7x4HxFxT8/BSoB7KQ05IgI6MunuyqXNBLQi/xwnGIGt1Mpl1da9cBkg5LdJQKuxjHn0lpdOnMJ9bfPmtaBI8PTp05ndu3dP3HHHHQOtra1vNTY2/uOBAwc+Nzk5edTfGtOgxcx+TSCya8+ePYG2tjav8swltOFq3t/Zrtt/ePLjC1Peg3CU4mJABAR+TQ4CVpZSmZT3m3fOy8MSg0qM9sy7lrggAxRdnJB/aeJs2bLlo0OHDv2J63qe/01+4rwnUE1NzaqtW7e2EZFgAYC4Od5tJBrVnUeO70lNeL3K0booYSq6kBGBpeh82vv7L/3k+ARaohRNzL+YOn+3BFByphsAxo/0DqZSqaO2bd0gIkxEqugbvXz58mYAvyqN42flBYgggX/tgfs3Leb+NUH9S1WKJD7wTU567654rv/fJZqvHi2Ez2Vng3k5hAAaBAClVCncUTqdblzMvJSA2Rdrt5qfP75vLJV7eQYgAoAiGE9wdtL7awACJBbM41MxQP7MR12l/gql8XnRZnSzCOjDFHbl0iZZAET2V398yn35+pf6384nRpcUZOakyzLAwYMHbSLi119/fZ3W+iZMx2szSILB4MBieVAcjM3tuu2V4wOjadMJRylAskoT59Je6tS4+20REDYkFnWdNp902AJQWg+0RETdfPPNLgDatGnTY47jOPDjgZL56ezZc8eR71iUkNSdB8SnTh17PDXpHkGNE0S1bY9mePfNiVNn0JmvBy5m7lkNwMw5P/3NlKsJ9vT0tI2Nje2tra29A3nlddFYBkCpVOqjH/3oP3pEhLDIC1MAgg0JiXfDO53MfWVo3P3b3wxN/eV7w8ndAhDi3Yu+R5w1G2TmLyaTySdGR5PZurrw8OTklBcI2JaIrAoGgxsDgcCt+YW/pCQOpZQBYCeTye/H4/HMjh07bADuYgX1V5haXjnZC6B3sfOU0qz1AMuyVobD4b8Ih/Mlv0gkUu7bQko8TczsKqXssbGxd3bu3PkvPgjOPxCqTJIvhrTnjR3vNpd7lT6fdLjs3SBmpsQApt3eU0rZyWSyv7+//+79+/ebzs5OVCyJLZAoDqZ4t0fxbu/TeEcwHbAwg5m5cDM8zQ+V7waLgx0PAPvRnzUyMvLT7u7u37n11luHAFDxOwF/2nx9gQo30mQAMbOVrxdN+XJcUSv8nb+2L2Rz9UpBFXQquhmuhKzF7wOmPWB0dPT9CxcuPNLc3PxDIH/+F94HlFAtbKVBovO5pGg4Gsh4wctUdwZpw0RABLYClBSSeA1HATmvBgCs4eHhtOM4rzhO4LNKUQOAiGVZAcuyCm8DypLrumKMGTHGnMhkMm8PDQ39rLW1dR8uvi1AWeWzEYad3o8cz3whkjUaoH4AQEvDp+IJU57JseANuFwFTwQk5HuEhg+kMzbm008/HVm9enWkujoSbmior/U8L9zQ0IBwOAzLyuPlyMgIBgcHXREZ7OvrO9fR0TFSGE9EYGY9axX4/xhNvxJTShmZpXxcifzV1sjfIzLmAUwVX4nF/eLGp0hzvRIrEUwoFovN541g8TvBK3SFrtD/X/ofZlj9wtmqDAoAAAAASUVORK5CYII=">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="BM Industries Flipbook">
+    <meta name="author" content="Shreyash Srivastva">
+    <title>BM Industries Flipbook</title>
+    <style>
+        :root {
+            /* --- THEME COLORS --- */
+            --brand-green: #00c853;
+            /* Vibrant Green */
+            --brand-green-glow: rgba(0, 200, 83, 0.4);
+
+            /* Dark Mode Defaults */
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --page-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            --control-bg: rgba(0, 0, 0, 0.8);
+            perspective: 2000px;
+        }
+
+        [data-theme="light"] {
+            /* Light Mode Defaults */
+            --bg-color: #f0f7f4;
+            /* Very subtle mint-white */
+            --text-color: #333333;
+            --page-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --control-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            overflow: hidden;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.1s;
+            touch-action: manipulation;
+        }
+
+        /* --- Click Navigation Zones (Invisible) --- */
+        .nav-zone {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            z-index: 500;
+            cursor: pointer;
+        }
+
+        .nav-zone.left {
+            left: 0;
+        }
+
+        .nav-zone.right {
+            right: 0;
+        }
+
+        /* Optional: Show a subtle arrow when hovering the sides on PC */
+        .nav-zone:hover {
+            background: linear-gradient(to right, rgba(0, 200, 83, 0.05), transparent);
+        }
+
+        .nav-zone.right:hover {
+            background: linear-gradient(to left, rgba(0, 200, 83, 0.05), transparent);
+        }
+
+        /* --- The Stage (Scaler) --- */
+        #scaler {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            flex-shrink: 0;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        /* --- The Book --- */
+        .book {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            perspective: 4000px;
+        }
+
+        /* --- The Pages --- */
+        .page {
+            position: absolute;
+            transform-origin: left center;
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            transition: 1.5s;
+            backface-visibility: hidden;
+            background-color: white;
+            box-shadow: 0 0 5px 0 rgba(25, 25, 25, 0.25);
+            border-radius: 0 5px 5px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .page:nth-child(1) {
+            transform: rotateY(0deg);
+        }
+
+        .page:nth-child(2) {
+            transform: rotateY(0deg);
+        }
+
+        .page:nth-child(3) {
+            transform: rotateY(0deg);
+        }
+
+        .page:nth-child(4) {
+            transform: rotateY(0deg);
+        }
+
+        .page:nth-child(5) {
+            transform: rotateY(0deg);
+        }
+
+        .page:nth-child(6) {
+            transform: rotateY(0deg);
+            overflow: hidden;
+        }
+
+        .page:nth-child(6)::after {
+            content: '';
+            width: 210px;
+            height: 300px;
+            position: absolute;
+            top: 0px;
+            right: 0%;
+            transform-origin: center;
+            transform: rotateY(180deg);
+            background-size: 420px 300px;
+            background-position: 100% -2px;
+        }
+
+        .page img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            pointer-events: none;
+            image-rendering: -webkit-optimize-contrast;
+            border-radius: 4px;
+        }
+
+        .page.flipped {
+            transform: rotateY(-180deg) rotateX(20deg);
+            transform-origin: left;
+            opacity: 0;
+            backface-visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Z-Index logic handled by JS, but defaults provided */
+        .page:nth-child(1) {
+            z-index: 10;
+        }
+
+        .page:nth-child(2) {
+            z-index: 9;
+        }
+
+        .page:nth-child(3) {
+            z-index: 8;
+        }
+
+        .page:nth-child(4) {
+            z-index: 7;
+        }
+
+        .page:nth-child(5) {
+            z-index: 6;
+        }
+
+        .page:nth-child(6) {
+            z-index: 5;
+        }
+
+        .page:nth-child(7) {
+            z-index: 4;
+        }
+
+        .page:nth-child(8) {
+            z-index: 3;
+        }
+
+        .page:nth-child(9) {
+            z-index: 2;
+        }
+
+        .page:nth-child(10) {
+            z-index: 1;
+        }
+
+        .page:nth-child(11) {
+            z-index: 0;
+        }
+
+        /* --- Creative Controls --- */
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: var(--control-bg);
+            padding: 12px 35px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: background 0.3s;
+        }
+
+        .btn {
+            background: transparent;
+            color: var(--text-color);
+            border: 2px solid var(--brand-green);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: var(--brand-green);
+            color: white;
+            box-shadow: 0 0 15px var(--brand-green-glow);
+            transform: scale(1.1);
+        }
+
+        .btn:disabled {
+            border-color: #ccc;
+            color: #ccc;
+            background: transparent;
+            cursor: default;
+            box-shadow: none;
+            transform: none;
+        }
+
+        #counter {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            min-width: 60px;
+            text-align: center;
+            user-select: none;
+            letter-spacing: 1px;
+        }
+
+        /* --- Styled Theme Toggle --- */
+        .theme-toggle {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            background: var(--brand-green);
+            /* Always Green */
+            color: rgb(0, 0, 0);
+            /* Always White Icon */
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.4rem;
+            z-index: 2000;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.15) rotate(-35deg);
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="nav-zone left" onclick="changePage(-1)" title="Previous Page"></div>
+    <div class="nav-zone right" onclick="changePage(1)" title="Next Page"></div>
+
+    <button class="theme-toggle" onclick="toggleTheme()" title="">
+        🌞
+    </button>
+
+    <div id="scaler">
+        <div class="book">
+            <div class="page"><img src="images/1.png" alt="Page"></div>
+            <div class="page"><img src="images/2.png" alt="Page"></div>
+            <div class="page"><img src="images/3.png" alt="Page"></div>
+            <div class="page"><img src="images/4.png" alt="Page"></div>
+            <div class="page"><img src="images/5.png" alt="Page"></div>
+            <div class="page"><img src="images/6.png" alt="Page"></div>
+            <div class="page"><img src="images/7.png" alt="Page"></div>
+            <div class="page"><img src="images/8.png" alt="Page"></div>
+            <div class="page"><img src="images/9.png" alt="Page"></div>
+            <div class="page"><img src="images/10.png" alt="Page"></div>
+            <div class="page"><img src="images/11.png" alt="Page"></div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn" id="prev" onclick="changePage(-1)">‹</button>
+        <span id="counter">1 / 11</span>
+        <button class="btn" id="next" onclick="changePage(1)">›</button>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 11;
+        const pages = document.querySelectorAll('.page');
+        const counter = document.getElementById('counter');
+        const scaler = document.getElementById('scaler');
+        const prevBtn = document.getElementById('prev');
+        const nextBtn = document.getElementById('next');
+        const toggleBtn = document.querySelector('.theme-toggle');
+
+        function updateUI() {
+            counter.innerText = `${currentPage} / ${totalPages}`;
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+        }
+
+        function changePage(dir) {
+            const nextIdx = currentPage + dir;
+            if (nextIdx < 1 || nextIdx > totalPages) return;
+
+            if (dir > 0) {
+                pages[currentPage - 1].classList.add('flipped');
+            } else {
+                pages[currentPage - 2].classList.remove('flipped');
+            }
+
+            currentPage = nextIdx;
+            updateUI();
+        }
+
+        // --- Responsive Scaling ---
+        function resize() {
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            const targetW = 1920;
+            const targetH = 1080;
+            const padding = 0.95;
+
+            const scaleX = (windowWidth * padding) / targetW;
+            const scaleY = (windowHeight * padding) / targetH;
+            const scale = Math.min(scaleX, scaleY);
+
+            scaler.style.transform = `scale(${scale})`;
+        }
+
+        // --- Swipe Logic ---
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX - 50) changePage(1);
+            if (touchEndX > touchStartX + 50) changePage(-1);
+        });
+
+        // --- Theme Logic ---
+        function toggleTheme() {
+            const body = document.body;
+            const theme = body.getAttribute('data-theme');
+
+            if (theme === 'light') {
+                body.setAttribute('data-theme', 'dark');
+                toggleBtn.innerHTML = '🌞'; // Sun icon for when it's dark
+            } else {
+                body.setAttribute('data-theme', 'light');
+                toggleBtn.innerHTML = '⭐'; // Moon icon for when it's light
+            }
+        }
+
+        window.addEventListener('resize', resize);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "ArrowRight") changePage(1);
+            if (e.key === "ArrowLeft") changePage(-1);
+        });
+
+        // Start
+        resize();
+        updateUI();
+    </script>
+</body>
+
+</html>
