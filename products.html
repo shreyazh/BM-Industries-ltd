@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en" x-data="projects()" :class="{'dark':dark}" x-init="init()" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products | B. M. Industrial Works</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { display: ['PT Sans', 'sans-serif'], body: ['DM Sans', 'sans-serif'] },
+          colors: { accent: '#FF6B2B', 'accent-light': '#FF8F5C' }
+        }
+      }
+    }
+  </script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;}
+    html{font-family:'DM Sans',sans-serif;}
+    h1,h2,h3,h4,h5,h6{font-family:'PT Sans',sans-serif;}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1);}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .nav-link{position:relative;}
+    .nav-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:currentColor;transition:width .25s cubic-bezier(.4,0,.2,1);}
+    .nav-link:hover::after{width:100%;}
+    ::-webkit-scrollbar{width:6px;height:6px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:#FF6B2B;border-radius:99px;}
+    body{transition:background-color .3s,color .3s;}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4;}
+    .btn-primary{position:relative;overflow:hidden;}
+    .btn-primary::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:rgba(255,255,255,.18);transform:skewX(-20deg);transition:left .4s cubic-bezier(.4,0,.2,1);}
+    .btn-primary:hover::after{left:160%;}
+    [x-cloak]{display:none!important;}
+    .photo-frame{position:relative;overflow:hidden;background:#e4e4e7;}
+    .photo-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+    .project-card{transition:transform .3s cubic-bezier(.4,0,.2,1),border-color .2s,box-shadow .3s;}
+    .project-card:hover{transform:translateY(-4px);box-shadow: 0 12px 24px -10px rgba(0,0,0,0.15);}
+  </style>
+</head>
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-body antialiased selection:bg-accent selection:text-white" :class="{'overflow-hidden': modalOpen}">
+
+  <header class="fixed top-0 left-0 right-0 z-40 transition-all duration-300"
+    :class="scrolled?'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-black/5':'bg-transparent'">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="font-display font-bold text-xl tracking-tight z-10">
+        <span class="text-zinc-900 dark:text-white">B</span><span class="text-accent">M</span>
+      </a>
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <li><a href="index.html#about" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">About</a></li>        
+        <li><a href="products.html" class="nav-link text-accent font-medium">Products</a></li>
+        <li><a href="brochure.html" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Brochure</a></li>
+        <li><a href="index.html#contact" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</a></li>
+      </ul>
+      <div class="flex items-center gap-3">
+        <button @click="dark=!dark;localStorage.setItem('theme',dark?'dark':'light')" class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" :aria-label="dark?'Light mode':'Dark mode'">
+          <svg x-show="!dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg x-show="dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+        </button>
+        <a href="index.html#contact" class="hidden md:inline-flex items-center gap-2 btn-primary bg-accent text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-accent-light transition-colors">Call &rarr;</a>
+        <button @click="mobileMenu=!mobileMenu" class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800" aria-label="Toggle menu">
+          <svg x-show="!mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg x-show="mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div x-show="mobileMenu" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2" class="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
+      <ul class="flex flex-col px-6 py-4 gap-4 text-sm font-medium">
+        <li><a href="index.html#services" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Services</a></li>
+        <li><a href="products.html" class="block text-accent font-medium">Products</a></li>
+        <li><a href="index.html#about" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">About</a></li>
+        <li><a href="index.html#contact" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="pt-36 pb-12 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-80 h-80 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="max-w-6xl mx-auto px-6 relative z-10">
+        <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Our Products</p>
+        <h1 class="reveal font-display font-bold text-5xl md:text-6xl text-zinc-900 dark:text-white leading-tight mb-4">Product Range</h1>
+        <p class="reveal text-lg text-zinc-500 dark:text-zinc-400 max-w-xl leading-relaxed mb-8">Fasteners, bars, pipes and raw materials for construction and industrial projects, stocked and supplied across all major grades.</p>
+        <div class="reveal flex flex-wrap gap-2">
+          <template x-for="f in filterOptions" :key="f.value">
+            <button
+              @click="filter = f.value"
+              :class="filter === f.value ? 'bg-accent text-white border-accent' : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:border-accent'"
+              class="text-sm px-4 py-1.5 rounded-full border transition-colors cursor-pointer"
+              x-text="f.label">
+            </button>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <template x-for="p in allProducts" :key="p.id">
+            <div
+              x-show="filter === 'all' || p.category === filter"
+              x-transition:enter="transition ease-out duration-300"
+              x-transition:enter-start="opacity-0 scale-95 translate-y-2"
+              x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+              x-transition:leave="transition ease-in duration-200"
+              x-transition:leave-start="opacity-100 scale-100"
+              x-transition:leave-end="opacity-0 scale-95">
+              <article 
+                @click="openModal(p)"
+                class="project-card group h-full rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                <div>
+                  <div class="photo-frame w-full h-48 relative overflow-hidden">
+                    <img :src="p.img" :alt="p.title" loading="lazy" class="group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/27272a/ffffff?text=BM+Industrial'"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                      <span class="text-xs font-medium text-white bg-accent/90 backdrop-blur-sm px-3 py-1 rounded-full">View Details &rarr;</span>
+                    </div>
+                  </div>
+                  <div class="p-6">
+                    <div class="flex flex-wrap gap-2 mb-3">
+                      <span class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full font-medium" x-text="p.tagPrimary"></span>
+                      <span class="text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full" x-text="p.tagSecondary"></span>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors" x-text="p.title"></h3>
+                    <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed line-clamp-2" x-text="p.desc"></p>
+                  </div>
+                </div>
+                <div class="px-6 pb-6 pt-0">
+                  <button type="button" @click.stop="openModal(p)" class="inline-flex items-center gap-1.5 text-sm font-semibold text-accent group-hover:translate-x-1 transition-transform">
+                    Enquire now &rarr;
+                  </button>
+                </div>
+              </article>
+            </div>
+          </template>
+        </div>
+        <div x-show="visibleCount === 0" x-cloak class="text-center py-20">
+          <p class="text-zinc-400 text-sm">No products in this category yet.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="bg-zinc-900 dark:bg-zinc-800 rounded-3xl p-10 md:p-14 text-center relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute bottom-0 left-0 w-40 h-40 bg-accent/10 rounded-full blur-2xl pointer-events-none"></div>
+          <div class="relative z-10">
+            <p class="text-xs font-medium text-accent tracking-widest uppercase mb-4">Bulk & project supply</p>
+            <h2 class="font-display font-bold text-3xl md:text-4xl text-white mb-4">Need materials for your site?</h2>
+            <p class="text-zinc-400 max-w-md mx-auto mb-8">Tell us your requirement, grade and quantity and get the pricing and other information.</p>
+            <a href="index.html#contact" class="inline-flex items-center gap-2 btn-primary bg-accent text-white font-medium px-8 py-3.5 rounded-full hover:bg-accent-light transition-colors">Contact Us &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div 
+    x-show="modalOpen" 
+    x-cloak 
+    @keydown.escape.window="closeModal()" 
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10"
+    role="dialog"
+    aria-modal="true"
+    :aria-label="selectedProduct ? selectedProduct.title : 'Product Details'">
+    
+    <!-- Backdrop Overlay -->
+    <div 
+      x-show="modalOpen" 
+      x-transition:enter="transition ease-out duration-300"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+      x-transition:leave="transition ease-in duration-200"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-0"
+      @click="closeModal()" 
+      class="fixed inset-0 bg-zinc-950/80 backdrop-blur-md"></div>
+
+    <!-- Modal Content Box -->
+    <div 
+      x-show="modalOpen" 
+      x-transition:enter="transition ease-out duration-300"
+      x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+      x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+      x-transition:leave="transition ease-in duration-200"
+      x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+      x-transition:leave-end="opacity-0 scale-95 translate-y-4"
+      class="relative w-full max-w-4xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl shadow-2xl overflow-hidden z-10 max-h-[90vh] flex flex-col">
+      
+      <!-- Close Button -->
+      <button 
+        @click="closeModal()" 
+        class="absolute top-4 right-4 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800/80 text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+        aria-label="Close detail view">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <template x-if="selectedProduct">
+        <div class="overflow-y-auto flex-1 p-6 md:p-8">
+          <div class="grid md:grid-cols-12 gap-8 items-start">
+            
+            <!-- Left Side: Image & Tags -->
+            <div class="md:col-span-5 flex flex-col gap-4">
+              <div class="relative w-full h-64 md:h-80 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800">
+                <img :src="selectedProduct.img" :alt="selectedProduct.title" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x600/27272a/ffffff?text=BM+Industrial'"/>
+                <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                  <span class="text-xs font-semibold bg-accent text-white px-3 py-1 rounded-full shadow-sm" x-text="selectedProduct.tagPrimary"></span>
+                </div>
+              </div>
+              <div class="bg-zinc-50 dark:bg-zinc-800/50 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800">
+                <h4 class="text-xs uppercase tracking-wider font-semibold text-zinc-400 mb-2">Standard Compliance</h4>
+                <p class="text-sm font-medium text-zinc-700 dark:text-zinc-300" x-text="selectedProduct.standards || 'ASTM, ASME, DIN, ISO, BS, JIS'"></p>
+              </div>
+            </div>
+
+            <!-- Right Side: Detailed Tech Specs -->
+            <div class="md:col-span-7 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-xs font-medium text-accent uppercase tracking-wider" x-text="selectedProduct.category"></span>
+                  <span class="text-zinc-300 dark:text-zinc-700">•</span>
+                  <span class="text-xs text-zinc-500 dark:text-zinc-400" x-text="selectedProduct.tagSecondary"></span>
+                </div>
+                
+                <h2 class="font-display font-bold text-2xl md:text-3xl text-zinc-900 dark:text-white mb-4" x-text="selectedProduct.title"></h2>
+                
+                <p class="text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed mb-6" x-text="selectedProduct.detailedDesc || selectedProduct.desc"></p>
+                
+                <!-- Specs Breakdown -->
+                <div class="space-y-4 border-t border-b border-zinc-100 dark:border-zinc-800 py-4 mb-6">
+                  
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <span class="block text-xs text-zinc-400 uppercase tracking-wider mb-1">Available Grades</span>
+                      <span class="text-sm font-medium text-zinc-800 dark:text-zinc-200" x-text="selectedProduct.grades || '304, 304L, 316, 316L, 310, 410'"></span>
+                    </div>
+                    <div>
+                      <span class="block text-xs text-zinc-400 uppercase tracking-wider mb-1">Size / Dimensions</span>
+                      <span class="text-sm font-medium text-zinc-800 dark:text-zinc-200" x-text="selectedProduct.dimensions || 'Standard & Custom Cut Sizes'"></span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span class="block text-xs text-zinc-400 uppercase tracking-wider mb-1.5">Key Highlights</span>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-zinc-600 dark:text-zinc-300">
+                      <template x-for="(feat, idx) in (selectedProduct.features || ['Corrosion Resistant', 'High Tensile Strength', 'Precision Engineered', 'Durability Tested'])" :key="idx">
+                        <li class="flex items-center gap-2">
+                          <svg class="w-3.5 h-3.5 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                          <span x-text="feat"></span>
+                        </li>
+                      </template>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <span class="block text-xs text-zinc-400 uppercase tracking-wider mb-1">Target Applications</span>
+                    <p class="text-xs text-zinc-600 dark:text-zinc-300" x-text="selectedProduct.applications || 'Chemical Plants, Construction, Automotive, Machinery, Oil & Gas'"></p>
+                  </div>
+                  
+                </div>
+              </div>
+
+              <!-- Action Toolbar -->
+              <div class="flex flex-wrap items-center gap-3 pt-2">
+                <a 
+                  :href="'index.html#contact'" 
+                  @click="closeModal()" 
+                  class="flex-1 btn-primary text-center bg-accent text-white font-medium text-sm py-3 px-6 rounded-xl hover:bg-accent-light transition-colors shadow-lg shadow-accent/20">
+                  Request Quote / Enquiry &rarr;
+                </a>
+                <button 
+                  type="button" 
+                  @click="closeModal()" 
+                  class="px-5 py-3 text-sm font-medium text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-colors">
+                  Close
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+
+  <footer class="border-t border-zinc-100 dark:border-zinc-900">
+    <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-zinc-400">© <span id="yr"></span> B. M. Industrial Works. All rights reserved. <br>
+        Developed by <a href="https://linkedin.com/in/shreyashsrivastva" target="_blank" class="font-bold hover:text-accent transition-colors">Shreyash Srivastva</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function projects() {
+      return {
+        dark: false,
+        scrolled: false,
+        mobileMenu: false,
+        filter: 'all',
+        selectedProduct: null,
+        modalOpen: false,
+
+        openModal(product) {
+          this.selectedProduct = product;
+          this.modalOpen = true;
+        },
+
+        closeModal() {
+          this.modalOpen = false;
+        },
+
+        filterOptions: [
+          { value: 'all',        label: 'All' },
+          { value: 'fasteners',  label: 'Fasteners' },
+          { value: 'stainless',  label: 'Stainless Steel' },
+          { value: 'bars-pipes', label: 'Bars & Pipes' },
+          { value: 'tmt',        label: 'TMT Bars' },
+          { value: 'alloy',      label: 'Alloy & Special Steel' },
+          { value: 'aluminium',  label: 'Aluminium' },
+          { value: 'stockist',   label: 'Stockist & Precision' },
+        ],
+
+        allProducts: [
+          { 
+            id: 1,  
+            title: 'SS 304 Grade Range',                 
+            category: 'stainless',  
+            tagPrimary: 'SS 304',         
+            tagSecondary: 'Stainless Steel',  
+            desc: 'Round bars, pipes, square bars, flat bars, sheets and fasteners in SS 304 grade stainless steel.', 
+            detailedDesc: 'SS 304 is the standard 18/8 stainless steel, widely versatile and used globally for its excellent formability, weldability, and resistance to atmospheric corrosion. Ideal for industrial and commercial manufacturing.',
+            grades: 'SS 304, SS 304L, SS 304H',
+            dimensions: 'Dia 3mm to 350mm | Thickness 0.5mm to 50mm',
+            standards: 'ASTM A276, A479, ASME SA276, DIN 17440',
+            applications: 'Food Processing, Chemical Equipment, Architectural Panels, Piping systems',
+            features: ['Superior Corrosion Resistance', 'High Temperature Endurance', 'Easy Fabrication', 'Non-Magnetic Properties'],
+            img: 'photos/steelmetal.png' 
+          },
+          { 
+            id: 2,  
+            title: 'SS 316 Grade Range',                 
+            category: 'stainless',  
+            tagPrimary: 'SS 316',         
+            tagSecondary: 'Stainless Steel',  
+            desc: 'Round bars, pipes, square bars, flat bars, sheets and fasteners in SS 316 grade stainless steel.', 
+            detailedDesc: 'Molybdenum-bearing SS 316 provides superior corrosion resistance in severe environments, particularly against pitting and crevice corrosion in chloride environments.',
+            grades: 'SS 316, SS 316L, SS 316Ti',
+            dimensions: 'Dia 6mm to 400mm | Length up to 6 Meters',
+            standards: 'ASTM A276, A479, EN 10088-3',
+            applications: 'Marine Components, Pharmaceutical Equipment, Chemical Processing, Coastal Structures',
+            features: ['Pitting Resistance', 'Excellent Creep Strength', 'High Acid Resistance', 'Cryogenic Toughness'],
+            img: 'photos/steel-rod.png' 
+          },
+          { 
+            id: 3,  
+            title: 'TMT Bar Dealership',                 
+            category: 'tmt',        
+            tagPrimary: 'TMT',            
+            tagSecondary: 'Dealership',        
+            desc: 'Authorised dealership for TMT bars, supplying reliable, corrosion-resistant reinforcement bars for construction.', 
+            detailedDesc: 'High-yield thermo-mechanically treated reinforcement steel bars engineered for high tensile strength, superior ductility, and extreme earthquake resistance in high-rise structures.',
+            grades: 'Fe 500, Fe 500D, Fe 550, Fe 550D, Fe 600',
+            dimensions: '8mm, 10mm, 12mm, 16mm, 20mm, 25mm, 32mm',
+            standards: 'IS 1786:2008, BIS Certified',
+            applications: 'Bridges, Commercial Towers, Residential Infrastructure, Dams, Flyovers',
+            features: ['Earthquake Resistant', 'High Weldability', 'Corrosion Protected Layer', 'Superior Bendability'],
+            img: 'photos/tmt.jpg' 
+          },
+          { 
+            id: 4,  
+            title: 'Fasteners (Carbon & Alloy Steel)',   
+            category: 'fasteners',  
+            tagPrimary: 'Fasteners',      
+            tagSecondary: 'MFG, B7/B7M',      
+            desc: 'B7, B7M, 8.8, 10.9, and 12.9 fasteners, stud bolts and 2H nuts, produced to industrial standards.', 
+            detailedDesc: 'Heavy-duty high strength stud bolts, hex bolts, threaded rods, and nuts engineered for high-pressure high-temperature service conditions.',
+            grades: 'ASTM A193 B7/B7M, A194 2H, Grade 8.8, 10.9, 12.9',
+            dimensions: 'M6 to M100 | Length 10mm to 1000mm',
+            standards: 'DIN 931/933, ASME B18.2.1, ISO 4014',
+            applications: 'Refineries, Power Generation Plants, Heavy Machinery, Pressure Vessels',
+            features: ['Extreme Torque Endurance', 'High Tensile Strength', 'Anti-Galling Properties', 'Precision Threading'],
+            img: 'photos/1.avif' 
+          },
+          { 
+            id: 5,  
+            title: 'SS Stud Bolts & Nuts',               
+            category: 'fasteners', 
+            tagPrimary: 'Stockist',       
+            tagSecondary: 'Stainless Steel',  
+            desc: 'SS202, SS304 and SS316 grade stud bolts and nuts, manufactured for precision and durability.', 
+            detailedDesc: 'Precision stainless steel threaded studs, full thread rods and heavy hex nuts manufactured to withstand corrosive environments and thermal cycling.',
+            grades: 'SS 202, SS 304, SS 316, A2-70, A4-80',
+            dimensions: 'M4 to M64 | Customized lengths',
+            standards: 'DIN 975, DIN 934, ASME B18.31.2',
+            applications: 'Marine Hardware, Water Treatment, Petrochemicals, Food Equipment',
+            features: ['Non-Corrosive Finish', 'Exact Thread Tolerance', 'High Heat Resistance', 'Longevity'],
+            img: 'photos/2.jpg' 
+          },
+          { 
+            id: 6, 
+            title: 'Inconel & Nickel Alloys',            
+            category: 'alloy',      
+            tagPrimary: 'Inconel',        
+            tagSecondary: 'Nickel Alloys',    
+            desc: 'Inconel and Nickel Alloy round bars for high-performance industrial applications.', 
+            detailedDesc: 'High-performance superalloys designed for continuous exposure to extreme temperatures, severe oxidation, and corrosive environments.',
+            grades: 'Inconel 600, 625, 718, Hastelloy C276, Monel 400',
+            dimensions: 'Dia 10mm to 250mm',
+            standards: 'ASTM B166, B446, B574, ASME SB166',
+            applications: 'Aerospace Components, Gas Turbines, Chemical Processing, Marine Engineering',
+            features: ['Extreme Heat Resistance', 'Oxidation Immunity', 'Cryogenic Stability', 'High Stress Resistance'],
+            img: 'photos/alloy.png' 
+          },
+          { 
+            id: 7,  
+            title: 'MS Round Bar',                       
+            category: 'bars-pipes', 
+            tagPrimary: 'MS',             
+            tagSecondary: 'Round Bar',        
+            desc: 'IS 2062 and SA36 grade mild steel round bars for construction and general engineering use.', 
+            detailedDesc: 'Durable and highly malleable low-carbon mild steel round bars manufactured for easy machining, bending, welding, and structural assembly.',
+            grades: 'IS 2062 E250 / E350, ASTM A36, SAE 1018',
+            dimensions: 'Dia 6mm to 200mm',
+            standards: 'IS 2062, ASTM A36',
+            applications: 'Structural Framing, Machine Shafts, Fabrication Work, Automotive Axles',
+            features: ['Excellent Weldability', 'High Ductility', 'Easy Machinability', 'Cost Effective'],
+            img: 'photos/ms-rod.jpg' 
+          },
+          { 
+            id: 8, 
+            title: 'Alloy Steel Round Bar',              
+            category: 'alloy',      
+            tagPrimary: 'Alloy Steel',    
+            tagSecondary: 'Round Bar',        
+            desc: 'EN8, EN9, EN19, EN24, EN353 and 4140 grade round bars for high-strength, wear-resistant applications.', 
+            detailedDesc: 'High-strength chromium-molybdenum alloy steel bars offering high hardenability, structural integrity, and exceptional fatigue resistance.',
+            grades: 'EN8, EN9, EN19, EN24, EN353, AISI 4140, 8620',
+            dimensions: 'Dia 16mm to 500mm',
+            standards: 'BS 970, ASTM A29, DIN 17200',
+            applications: 'Gears, Crankshafts, Heavy Duty Pinions, Hydraulic Shafts, Fasteners',
+            features: ['High Tensile Yield', 'Wear & Tear Resistant', 'Heat Treatable', 'Fatigue Resistant'],
+            img: 'photos/round-bar.avif' 
+          },
+          { 
+            id: 9, 
+            title: 'Duplex & Super Duplex',              
+            category: 'alloy',      
+            tagPrimary: 'Duplex',         
+            tagSecondary: 'Super Duplex',    
+            desc: 'Duplex and Super Duplex round bars for demanding industrial and corrosion-resistant applications.', 
+            detailedDesc: 'Dual-phase microstructure combining austenitic and ferritic stainless steel properties, providing double the mechanical strength of standard stainless steels.',
+            grades: 'UNS S31803 (2205), UNS S32750 (2507)',
+            dimensions: 'Dia 12mm to 300mm',
+            standards: 'ASTM A276, A182, EN 10088-3',
+            applications: 'Offshore Oil Rig Riser Pipes, Desalination Plants, Chemical Tankers',
+            features: ['Ultra-High Yield Strength', 'Pitting & Crevice Proof', 'Stress Corrosion Crack Proof', 'High Thermal Conductivity'],
+            img: 'photos/ms-steel.jpg' 
+          },
+          { 
+            id: 10, 
+            title: 'Aluminium Products',                
+            category: 'aluminium',  
+            tagPrimary: 'Aluminium',      
+            tagSecondary: '6082/6063/6061',    
+            desc: 'Rods, square bars, flat bars and pipes in 6082 T6, 6063 and 6061 grade aluminium.', 
+            detailedDesc: 'Lightweight, structural aluminium alloys featuring superior strength-to-weight ratios, excellent anodizing characteristics, and corrosion tolerance.',
+            grades: 'HE30 (6082 T6), 6061 T6, 6063, 7075',
+            dimensions: 'Rods: 6mm to 250mm | Tubes: Wall 1mm to 20mm',
+            standards: 'ASTM B221, EN 755',
+            applications: 'Aerospace Frameworks, Automotive Bodies, Architectural Extrusions, Structural Rigging',
+            features: ['Ultra Lightweight', 'High Strength-to-Weight', 'Anodizing Friendly', 'Corrosion Resistance'],
+            img: 'photos/rods.avif' 
+          },
+          { 
+            id: 11, 
+            title: 'Raw Material Stockist',              
+            category: 'stockist',   
+            tagPrimary: 'Stockist',       
+            tagSecondary: 'Raw Material',    
+            desc: 'Various grades of raw material including stainless steel, mild steel, alloy steel and specialty metals.', 
+            detailedDesc: 'Comprehensive stockyard supplying prime quality industrial raw materials, including billets, ingots, plates, pipes, and specialized alloy sections.',
+            grades: 'Ferrous & Non-Ferrous All Grades',
+            dimensions: 'Custom Mill Volumes & Cut Sections',
+            standards: 'ISO 9001 Certified Sourcing',
+            applications: 'Turnkey Construction, Manufacturing Supply Chain, Precision Foundries',
+            features: ['Mill Test Certified', 'Prompt Dispatch', 'Custom Cutting Service', 'Traceable Origin'],
+            img: 'photos/3.avif' 
+          },
+          { 
+            id: 12, 
+            title: 'Precision / Drawing Components',    
+            category: 'stockist',   
+            tagPrimary: 'Precision',      
+            tagSecondary: 'All Grades',        
+            desc: 'All types of drawing items across all grades, manufactured as per customer drawings and finish requirements.', 
+            detailedDesc: 'Custom CNC-turned, milled, and engineered precision mechanical components crafted strictly as per client blueprints, technical specifications, and surface tolerances.',
+            grades: 'SS, Brass, Mild Steel, Titanium, Custom Alloys',
+            dimensions: 'As per Customer Engineering Blueprint',
+            standards: 'DIN ISO 2768 Precision Standards',
+            applications: 'Automotive Assemblies, Valve Components, Aerospace Fittings, Defense Machinery',
+            features: ['Micron-Level Tolerance', 'Custom Finishes', 'Prototyping to Mass Production', 'Rigorous QC Inspection'],
+            img: 'photos/lathe.avif' 
+          },
+        ],
+
+        get visibleCount() {
+          if (this.filter === 'all') return this.allProducts.length;
+          return this.allProducts.filter(p => p.category === this.filter).length;
+        },
+
+        init() {
+          this.dark = localStorage.getItem('theme') === 'dark'
+            || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+          window.addEventListener('scroll', () => {
+            this.scrolled = window.scrollY > 20;
+          }, { passive: true });
+
+          this.$nextTick(() => {
+            const obs = new IntersectionObserver(entries => {
+              entries.forEach(e => {
+                if (e.isIntersecting) {
+                  e.target.classList.add('visible');
+                  obs.unobserve(e.target);
+                }
+              });
+            }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+            document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+          });
+        }
+      }
+    }
+
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
