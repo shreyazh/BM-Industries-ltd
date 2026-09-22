@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" x-data="app()" :class="{'dark':dark}" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="data:image/png;base64,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">
+  <link rel="icon" type="image/png"
+    href="data:image/png;base64,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">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="B. M. Industrial Works — your trusted partner in industrial solutions.">
-  <meta name="keywords" content="industrial solutions, industrial raw materials, manufacturing, engineering, B. M. Industrial Works">
+  <meta name="keywords"
+    content="industrial solutions, industrial raw materials, manufacturing, engineering, B. M. Industrial Works">
   <meta name="author" content="Shreyash Srivastva">
   <meta property="og:title" content="B. M. Industrial Works">
   <meta property="og:description" content="Your trusted partner in industrial solutions.">
@@ -205,9 +208,10 @@
         <li><a href="#about"
             class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
             :class="s==='about'?'on !text-zinc-900 dark:!text-white':''">About</a></li>
-        <li><a href="#products"
-            class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
-            :class="s==='products'?'on !text-zinc-900 dark:!text-white':''">Products</a></li>
+        <li><a href="products.html"
+            class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Products</a></li>
+        <li><a href="brochure.html"
+            class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Brochure</a></li>
         <li><a href="#contact"
             class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
             :class="s==='contact'?'on !text-zinc-900 dark:!text-white':''">Contact</a></li>
@@ -291,12 +295,12 @@
             </h1>
             <p
               class="reveal d2 text-lg md:text-xl text-zinc-500 dark:text-zinc-400 font-light leading-relaxed max-w-md mb-10">
-              Leading <strong class="font-medium text-zinc-700 dark:text-zinc-300">Manufacturer &amp; Supplier of
+              Freelance <strong class="font-medium text-zinc-700 dark:text-zinc-300">Manufacturer &amp; Supplier of
                 Industrial Fasteners, TMT Bars, Engineering Raw Materials, and Stainless Steel/MS Stud Bolts & Nuts.
                 Trusted quality, competitive pricing, and timely delivery.
             </p>
             <div class="reveal d3 flex flex-wrap gap-4">
-              <a href="#products"
+              <a href="products.html"
                 class="shimmer inline-flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium px-7 py-3.5 rounded-full hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors text-sm">
                 View Products
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -392,12 +396,12 @@
       </div>
     </section>
 
-    <!-- ═══ SERVICES ═══
-    <section id="services" class="py-24 bg-zinc-50 dark:bg-zinc-900/40">
+    <!-- ═══ SERVICES ═══ -->
+    <section id="services" class="py-24">
       <div class="max-w-6xl mx-auto px-6">
         <div class="mb-14">
-          <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Our Products</p>
-          <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">Product Range
+          <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">What We Offer</p>
+          <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">Our Services
           </h2>
         </div>
         <div class="grid md:grid-cols-3 gap-6">
@@ -411,8 +415,7 @@
                   d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2" />
               </svg>
             </div>
-            <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-3">Stud/Hex Bolts, Allen Cap &
-              Nuts</h3>
+            <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-3">Wide Fastener Range</h3>
             <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">B7/B7M, 2H, SS grades, Hex Bolt, Allen
               Cap</p>
           </article>
@@ -448,257 +451,8 @@
 
         </div>
       </div>
-    </section> -->
-
-    <!-- ═══ Products ═══ -->
-    <section id="products" class="py-24">
-      <div class="max-w-6xl mx-auto px-6">
-        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
-          <div>
-            <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">WHAT WE OFFER</p>
-            <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">Our Products
-              & Services</h2>
-          </div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-6">
-
-          <article
-            class="card-h reveal d1 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
-            <div class="pf w-full h-48">
-              <img src="photos/1.avif" alt="Fasteners" loading="lazy">
-            </div>
-            <div class="p-6">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span
-                  class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">Fasteners</span>
-                <span
-                  class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">MFG</span>
-              </div>
-              <h3 class="font-display font-bold text-2xl text-zinc-900 dark:text-white mb-2">Fasteners Manufacturing
-              </h3>
-
-              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-5">B7, B7M, 8.8, 10.9 & 12.9 grade
-                fasteners, stud bolts, and 2H nuts, produced to industrial standards.</p>
-            </div>
-          </article>
-
-          <article
-            class="card-h reveal d2 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
-            <div class="pf w-full h-48">
-              <img src="photos/2.jpg" alt="Stud Bolts & Nuts" loading="lazy">
-            </div>
-            <div class="p-6">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span
-                  class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">Stockist</span>
-                <span
-                  class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">Raw
-                  Material</span>
-              </div>
-              <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1.5">Stainless Steel Stud Bolts
-                & Nuts</h3>
-              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">SS202, SS304, and SS316 grade
-                stud bolts and nuts, manufactured for precision and durability.</p>
-            </div>
-          </article>
-
-          <article
-            class="card-h reveal d3 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
-            <div class="pf w-full h-48">
-              <img src="photos/3.avif" alt="Raw Material" loading="lazy">
-            </div>
-            <div class="p-6">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span
-                  class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">Fasteners</span>
-              </div>
-              <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1.5">Raw Material Stockist</h3>
-              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">Stockists of MS, EN8, EN19, EN24,
-                EN353, SS202/304/316/321, Duplex, Super Duplex & Inconel in round bars, sheets, plates, pipes & tubes.
-              </p>
-            </div>
-          </article>
-
-          <article
-            class="card-h reveal d1 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
-            <div class="pf w-full h-48">
-              <img src="photos/tmt.jpg" alt="TMT Bar" loading="lazy">
-            </div>
-            <div class="p-6">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span
-                  class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">TMT</span>
-                <span
-                  class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">Dealership</span>
-              </div>
-              <h3 class="font-display font-bold text-2xl text-zinc-900 dark:text-white mb-2">TMT Bar Dealership</h3>
-
-              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-5">Authorized dealership for TMT
-                bars, supplying reliable, corrosion-resistant reinforcement bars for construction and infrastructure
-                projects.</p>
-            </div>
-          </article>
-
-          <article
-            class="card-h reveal d2 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
-            <div class="pf w-full h-48">
-              <img src="photos/ms-steel.jpg" alt="MS Pipes" loading="lazy">
-            </div>
-            <div class="p-6">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span
-                  class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">MS</span>
-                <span
-                  class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">Pipes</span>
-              </div>
-              <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1.5">MS Pipes</h3>
-              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">Mild steel round, square, and
-                rectangle pipes for structural and industrial fabrication needs.</p>
-            </div>
-          </article>
-
-          <article
-            class="card-h reveal d3 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
-            <div class="pf w-full h-48">
-              <img src="photos/ms-rod.jpg" alt="MS Round Bar" loading="lazy">
-            </div>
-            <div class="p-6">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span
-                  class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">MS</span>
-                <span
-                  class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">Round
-                  Bar</span>
-              </div>
-              <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1.5">MS Round Bar</h3>
-              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">IS 2062 and SA36 grade mild
-                steel round bars for construction and general engineering use.</p>
-            </div>
-          </article>
-
-          <article
-            class="card-h reveal d1 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
-            <div class="pf w-full h-48">
-              <img src="photos/round-bar.avif" alt="Alloy Steel Round Bar" loading="lazy">
-            </div>
-            <div class="p-6">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span
-                  class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">Alloy
-                  Steel</span>
-                <span
-                  class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">Round
-                  Bar</span>
-              </div>
-              <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1.5">Alloy Steel Round Bar</h3>
-              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">EN8, EN9, EN19, EN24, EN353, and
-                4140 grade round bars for high-strength and wear-resistant applications.</p>
-            </div>
-          </article>
-
-          <article
-            class="card-h reveal d2 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
-            <div class="pf w-full h-48">
-              <img src="photos/steelmetal.png" alt="SS 304 Products" loading="lazy">
-            </div>
-            <div class="p-6">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span
-                  class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">SS
-                  304</span>
-                <span
-                  class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">Stainless
-                  Steel</span>
-              </div>
-              <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1.5">SS 304 Grade Range</h3>
-              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">Round bars, pipes, square bars,
-                flat bars, sheets, and fasteners in SS 304 grade stainless steel.</p>
-            </div>
-          </article>
-
-          <article
-            class="card-h reveal d3 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
-            <div class="pf w-full h-48">
-              <img src="photos/steel-rod.png" alt="SS 316 Products" loading="lazy">
-            </div>
-            <div class="p-6">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span
-                  class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">SS
-                  316</span>
-                <span
-                  class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">Stainless
-                  Steel</span>
-              </div>
-              <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1.5">SS 316 Grade Range</h3>
-              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">Round bars, pipes, square bars,
-                flat bars, sheets, and fasteners in corrosion-resistant SS 316 grade.</p>
-            </div>
-          </article>
-
-          <article
-            class="card-h reveal d1 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
-            <div class="pf w-full h-48">
-              <img src="photos/alloy.png" alt="Duplex & Nickel Alloys" loading="lazy">
-            </div>
-            <div class="p-6">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span
-                  class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">Duplex</span>
-                <span
-                  class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">Nickel
-                  Alloys</span>
-              </div>
-              <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1.5">Duplex & Nickel Alloy
-                Round Bar</h3>
-              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">Super Duplex, Duplex, Inconel,
-                and Nickel Alloy round bars for high-performance industrial applications.</p>
-            </div>
-          </article>
-
-          <article
-            class="card-h reveal d2 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
-            <div class="pf w-full h-48">
-              <img src="photos/rods.avif" alt="Aluminium Products" loading="lazy">
-            </div>
-            <div class="p-6">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span
-                  class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">Aluminium</span>
-                <span
-                  class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">6082/6063/6061</span>
-              </div>
-              <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1.5">Aluminium Products</h3>
-              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">Rods, square bars, flat bars,
-                and pipes in 6082 T6, 6063, and 6061 grade aluminium.</p>
-            </div>
-          </article>
-
-          <article
-            class="card-h reveal d3 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
-            <div class="pf w-full h-48">
-              <img src="photos/lathe.avif" alt="Precision Drawing Items" loading="lazy">
-            </div>
-            <div class="p-6">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span
-                  class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">Precision</span>
-                <span
-                  class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">All
-                  Grades</span>
-              </div>
-              <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-1.5">Precision Drawing Items
-              </h3>
-              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">All types of drawing items
-                across every grade, engineered to precise tolerance and finish requirements fulfilling customer's exact
-                expectations.</p>
-            </div>
-          </article>
-
-        </div>
-      </div>
     </section>
+
 
     <!-- ═══ CONTACT ═══ -->
     <section id="contact" class="py-24">
