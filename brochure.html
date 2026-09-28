@@ -31,6 +31,7 @@
             --control-bg: rgba(255, 255, 255, 0.9);
         }
 
+
         body,
         html {
             margin: 0;
@@ -62,6 +63,7 @@
         }
 
         .nav-zone.right {
+
             right: 0;
         }
 
@@ -95,6 +97,7 @@
             perspective: 4000px;
         }
 
+
         /* --- The Pages --- */
         .page {
             position: absolute;
@@ -127,6 +130,7 @@
             transform: rotateY(0deg);
         }
 
+
         .page:nth-child(5) {
             transform: rotateY(0deg);
         }
@@ -157,6 +161,7 @@
             image-rendering: -webkit-optimize-contrast;
             border-radius: 4px;
         }
+
 
         .page.flipped {
             transform: rotateY(-180deg) rotateX(20deg);
@@ -191,6 +196,7 @@
             z-index: 5;
         }
 
+
         .page:nth-child(7) {
             z-index: 4;
         }
@@ -222,6 +228,7 @@
             align-items: center;
             gap: 20px;
             background: var(--control-bg);
+
             padding: 12px 35px;
             border-radius: 50px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -254,6 +261,7 @@
 
         .btn:disabled {
             border-color: #ccc;
+
             color: #ccc;
             background: transparent;
             cursor: default;
@@ -286,6 +294,7 @@
             border-radius: 50%;
             cursor: pointer;
             font-size: 1.4rem;
+
             z-index: 2000;
             box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -301,6 +310,39 @@
         .theme-toggle:active {
             transform: scale(0.95);
         }
+
+        /* --- Back Button (top-left, mirrors theme toggle) --- */
+        .back-btn {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            background: var(--brand-green);
+            color: rgb(0, 0, 0);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.6rem;
+            font-weight: bold;
+            line-height: 1;
+            text-decoration: none;
+
+            z-index: 2000;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.15) translateX(-3px);
+        }
+
+        .back-btn:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 
@@ -309,12 +351,16 @@
     <div class="nav-zone left" onclick="changePage(-1)" title="Previous Page"></div>
     <div class="nav-zone right" onclick="changePage(1)" title="Next Page"></div>
 
+    <!-- Back button: top-left, goes to index.html -->
+    <a class="back-btn" href="index.html" title="Back to Home" aria-label="Back to Home">👈</a>
+
     <button class="theme-toggle" onclick="toggleTheme()" title="">
         🌞
     </button>
 
     <div id="scaler">
         <div class="book">
+
             <div class="page"><img src="images/1.png" alt="Page"></div>
             <div class="page"><img src="images/2.png" alt="Page"></div>
             <div class="page"><img src="images/3.png" alt="Page"></div>
@@ -347,6 +393,7 @@
 
         function updateUI() {
             counter.innerText = `${currentPage} / ${totalPages}`;
+
             prevBtn.disabled = currentPage === 1;
             nextBtn.disabled = currentPage === totalPages;
         }
@@ -380,6 +427,7 @@
             scaler.style.transform = `scale(${scale})`;
         }
 
+
         // --- Swipe Logic ---
         let touchStartX = 0;
         let touchEndX = 0;
@@ -411,6 +459,7 @@
         window.addEventListener('resize', resize);
 
         document.addEventListener('keydown', (e) => {
+
             if (e.key === "ArrowRight") changePage(1);
             if (e.key === "ArrowLeft") changePage(-1);
         });
