@@ -167,8 +167,60 @@
     .pf img {
       width: 100%;
       height: 100%;
+      display: block;
       object-fit: cover;
-      display: block
+      object-position: top;
+      /* shows top of tall certificates */
+    }
+
+    /* certificate popup */
+    #blog article {
+      cursor: zoom-in;
+    }
+
+    #services article {
+      padding: 2rem;
+    }
+
+    #cert-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(0, 0, 0, 0.85);
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    #cert-modal.open {
+      display: flex;
+    }
+
+    #cert-modal .box {
+      max-width: 900px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #fff;
+      border-radius: 12px;
+    }
+
+    #cert-modal img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    #cert-close {
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      color: #fff;
+      font-size: 40px;
+      line-height: 1;
+      background: none;
+      border: 0;
+      cursor: pointer;
     }
 
     /* card hover */
@@ -304,7 +356,7 @@
             </h1>
             <p
               class="reveal d2 text-lg md:text-xl text-zinc-500 dark:text-zinc-400 font-light leading-relaxed max-w-md mb-10">
-                Leading <strong class="font-medium text-zinc-700 dark:text-zinc-300">Manufacturer &amp; Supplier of
+              Leading <strong class="font-medium text-zinc-700 dark:text-zinc-300">Manufacturer &amp; Supplier of
                 Industrial Fasteners, TMT Bars, Engineering Raw Materials, and Stainless Steel/MS Stud Bolts & Nuts.
                 Trusted quality, competitive pricing, and timely delivery.
             </p>
@@ -350,7 +402,6 @@
         </div>
       </div>
     </section>
-
 
     <!-- ═══ ABOUT ═══ -->
     <section id="about" class="py-24">
@@ -416,7 +467,7 @@
         <div class="grid md:grid-cols-3 gap-6">
 
           <article
-            class="reveal d1 card-h group bg-white dark:bg-zinc-900 rounded-2xl p-8 border border-zinc-800 dark:border-zinc-800 hover:border-accent">
+            class="cert-card reveal d1 card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:border-accent">
             <div
               class="w-12 h-12 flex items-center justify-center bg-orange-50 dark:bg-zinc-800 rounded-xl mb-6 group-hover:bg-accent/10 transition-colors">
               <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -430,7 +481,7 @@
           </article>
 
           <article
-            class="reveal d2 card-h group bg-beige-400 dark:bg-zinc-800 rounded-2xl p-8 border border-zinc-800 hover:border-accent">
+            class="cert-card reveal d2 card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:border-accent">
             <div
               class="w-12 h-12 flex items-center justify-center bg-zinc-800 dark:bg-zinc-700 rounded-xl mb-6 group-hover:bg-accent/20 transition-colors">
               <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -444,7 +495,7 @@
           </article>
 
           <article
-            class="reveal d3 card-h group bg-white dark:bg-zinc-900 rounded-2xl p-8 border border-zinc-600 dark:border-zinc-800 hover:border-accent">
+            class="cert-card reveal d3 card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:border-accent">
             <div
               class="w-12 h-12 flex items-center justify-center bg-orange-50 dark:bg-zinc-800 rounded-xl mb-6 group-hover:bg-accent/10 transition-colors">
               <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -463,6 +514,73 @@
       </div>
     </section>
 
+    <!-- ═══ Certs ═══ -->
+    <section id="blog" class="py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+          <div>
+            <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Certifications</p>
+            <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">Professional
+              Credentials</h2>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+
+          <article
+            class="cert-card cursor-pointer reveal d1 card-h group bg-white reveal d1 card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+            <div class="pf w-full h-44">
+              <img src="certs/GST.jpg" alt="Certificate" loading="lazy">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <span
+                  class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-2.5 py-1 rounded-full">Design</span>
+                <span class="text-xs text-zinc-400">Sep 3, 2022</span>
+              </div>
+              <h3
+                class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors">
+                GST Certificate</h3>
+            </div>
+          </article>
+
+          <article
+            class="cert-card cursor-pointer reveal d1 card-h group bg-white reveal d2 card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+            <div class="pf w-full h-44">
+              <img src="certs/iso.jpg" alt="Certificate" loading="lazy">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <span
+                  class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-2.5 py-1 rounded-full">Dev</span>
+                <span class="text-xs text-zinc-400">Jun 28, 2025</span>
+              </div>
+              <h3
+                class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors">
+                ISO Certificate</h3>
+            </div>
+          </article>
+
+          <article
+            class="cert-card cursor-pointer reveal d1 card-h group bg-white reveal d3 card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+            <div class="pf w-full h-44">
+              <img src="certs/dealer.jpg" alt="Certificate" loading="lazy">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <span
+                  class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-2.5 py-1 rounded-full">Freelance</span>
+                <span class="text-xs text-zinc-400">May 05, 2026</span>
+              </div>
+              <h3
+                class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors">
+                Dealer Certificate</h3>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
 
     <!-- ═══ CONTACT ═══ -->
     <section id="contact" class="py-24">
@@ -603,8 +721,42 @@
         }
       }
     }
-  </script>
 
+  </script>
+  <div id="cert-modal">
+    <button id="cert-close" aria-label="Close">&times;</button>
+    <div class="box"><img id="cert-modal-img" src="" alt="Certificate"></div>
+  </div>
+
+  <script>
+    (function () {
+      var modal = document.getElementById('cert-modal');
+      var modalImg = document.getElementById('cert-modal-img');
+
+      function closeCert() {
+        modal.classList.remove('open');
+        modalImg.src = '';
+        document.body.style.overflow = '';
+      }
+
+      document.addEventListener('click', function (e) {
+        var card = e.target.closest('#blog article');
+        if (card) {
+          var img = card.querySelector('img');
+          if (!img) return;
+          modalImg.src = img.getAttribute('src');
+          modal.classList.add('open');
+          document.body.style.overflow = 'hidden';
+          return;
+        }
+        if (e.target === modal || e.target.id === 'cert-close') closeCert();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeCert();
+      });
+    })();
+  </script>
 </body>
 
 </html>
