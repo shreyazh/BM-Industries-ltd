@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en" x-data="projects()" :class="{'dark':dark}" x-init="init()" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png"
+    href="data:image/png;base64,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">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Shreyash Srivastva">
+  <title>Products | B. M. Industrial Works</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap"
+    rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { display: ['PT Sans', 'sans-serif'], body: ['DM Sans', 'sans-serif'] },
+          colors: { accent: '#FF6B2B', 'accent-light': '#FF8F5C' }
+        }
+      }
+    }
+  </script>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'PT Sans', sans-serif;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .55s cubic-bezier(.4, 0, .2, 1), transform .55s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: currentColor;
+      transition: width .25s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #FF6B2B;
+      border-radius: 99px;
+    }
+
+    body {
+      transition: background-color .3s, color .3s;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: .4;
+    }
+
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: rgba(255, 255, 255, .18);
+      transform: skewX(-20deg);
+      transition: left .4s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .btn-primary:hover::after {
+      left: 160%;
+    }
+
+    [x-cloak] {
+      display: none !important;
+    }
+
+    .photo-frame {
+      position: relative;
+      overflow: hidden;
+      background: #e4e4e7;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-card {
+      transition: transform .3s cubic-bezier(.4, 0, .2, 1), border-color .2s, box-shadow .3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
+    }
+
+    .project-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 0 1px rgba(234, 88, 12, 0.25),
+        0 20px 40px -12px rgba(234, 88, 12, 0.35),
+        0 0 60px -10px rgba(234, 88, 12, 0.25);
+    }
+  </style>
+</head>
+
+<body
+  class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-body antialiased selection:bg-accent selection:text-white">
+
+  <header class="fixed top-0 left-0 right-0 z-40 transition-all duration-300"
+    :class="scrolled?'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-black/5':'bg-transparent'">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="font-display font-bold text-xl tracking-tight z-10">
+        <span class="text-zinc-900 dark:text-white">B</span><span class="text-accent">M</span>
+      </a>
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <li><a href="index.html#hero"
+            class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Home</a>
+        </li>
+        <li><a href="index.html#about"
+            class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">About</a>
+        </li>
+        <li><a href="products.html"
+            class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Products</a>
+        </li>
+        <li><a href="brochure.html" target="_blank"
+            class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Brochure</a>
+        </li>
+        <li><a href="index.html#contact"
+            class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</a>
+        </li>
+      </ul>
+      <div class="flex items-center gap-3">
+        <button @click="dark=!dark;localStorage.setItem('theme',dark?'dark':'light')"
+          class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+          :aria-label="dark?'Light mode':'Dark mode'">
+          <svg x-show="!dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+          </svg>
+          <svg x-show="dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+          </svg>
+        </button>
+        <a href="index.html#contact"
+          class="hidden md:inline-flex items-center gap-2 btn-primary bg-accent text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-accent-light transition-colors">Call
+          &rarr;</a>
+        <button @click="mobileMenu=!mobileMenu"
+          class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800"
+          aria-label="Toggle menu">
+          <svg x-show="!mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg x-show="mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+    <div x-show="mobileMenu" x-cloak x-transition:enter="transition ease-out duration-200"
+      x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+      x-transition:leave-end="opacity-0 -translate-y-2"
+      class="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
+      <ul class="flex flex-col px-6 py-4 gap-4 text-sm font-medium">
+        <li><a href="index.html#hero" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Home</a>
+        </li>
+        <li><a href="index.html#about" @click="mobileMenu=false"
+            class="block text-zinc-700 dark:text-zinc-300">About</a></li>
+        <li><a href="products.html" @click="mobileMenu=false"
+            class="block text-zinc-700 dark:text-zinc-300">Products</a></li>
+        <li><a href="brochure.html" target="_blank" @click="mobileMenu=false"
+            class="block text-zinc-700 dark:text-zinc-300">Brochure</a></li>
+        <li><a href="index.html#contact" @click="mobileMenu=false"
+            class="block text-zinc-700 dark:text-zinc-300">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="pt-36 pb-12 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-80 h-80 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="max-w-6xl mx-auto px-6 relative z-10">
+        <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Our Products</p>
+        <h1 class="reveal font-display font-bold text-5xl md:text-6xl text-zinc-900 dark:text-white leading-tight mb-4">
+          Product Range</h1>
+        <p class="reveal text-lg text-zinc-500 dark:text-zinc-400 max-w-xl leading-relaxed mb-8">Nine product
+          categories covering
+          construction steel, stainless, fasteners, aluminium, alloy and special grades. Select a category to view its
+          full range.</p>
+      </div>
+    </section>
+
+    <section class="pb-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <template x-for="(p, i) in allProducts" :key="p.id">
+            <a :href="p.link"
+              class="reveal project-card group rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-accent flex flex-col">
+              <div class="photo-frame w-full h-44 relative">
+                <img :src="p.img" :alt="p.title" loading="lazy"
+                  class="group-hover:scale-105 transition-transform duration-500"
+                  onerror="this.src='https://placehold.co/600x400/27272a/ffffff?text=BM+Industrial'" />
+                <span
+                  class="absolute top-3 left-3 text-xs font-semibold bg-white/90 dark:bg-zinc-900/90 text-zinc-900 dark:text-white px-2.5 py-1 rounded-md"
+                  x-text="String(i + 1).padStart(2, '0')"></span>
+              </div>
+              <div class="p-5 flex flex-col flex-1">
+                <h3
+                  class="font-display font-bold text-lg text-zinc-900 dark:text-white group-hover:text-accent transition-colors mb-2"
+                  x-text="p.title"></h3>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed line-clamp-2 mb-4" x-text="p.desc">
+                </p>
+                <div class="mt-auto pt-4 border-t border-zinc-100 dark:border-zinc-800">
+                  <span class="block text-[11px] uppercase tracking-wider text-zinc-400 mb-1">Includes</span>
+                  <p class="text-sm text-zinc-700 dark:text-zinc-300 leading-snug line-clamp-2 min-h-[2.5rem]"
+                    x-text="p.includes"></p>
+                </div>
+              </div>
+              <div
+                class="px-5 py-3.5 bg-zinc-50 dark:bg-zinc-800/50 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-sm font-semibold text-accent">
+                <span>View range</span>
+                <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+              </div>
+            </a>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="bg-zinc-900 dark:bg-zinc-800 rounded-3xl p-10 md:p-14 text-center relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute bottom-0 left-0 w-40 h-40 bg-accent/10 rounded-full blur-2xl pointer-events-none"></div>
+          <div class="relative z-10">
+            <p class="text-xs font-medium text-accent tracking-widest uppercase mb-4">Bulk & project supply</p>
+            <h2 class="font-display font-bold text-3xl md:text-4xl text-white mb-4">Need materials for your site?</h2>
+            <p class="text-zinc-400 max-w-md mx-auto mb-8">Tell us your requirement, grade and quantity and get the
+              pricing and other information.</p>
+            <a href="index.html#contact"
+              class="inline-flex items-center gap-2 btn-primary bg-accent text-white font-medium px-8 py-3.5 rounded-full hover:bg-accent-light transition-colors">Contact
+              Us &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-zinc-100 dark:border-zinc-900">
+    <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-zinc-400">© <span id="yr"></span> B. M. Industrial Works. All rights reserved. <br>
+        Developed by <a href="https://linkedin.com/in/shreyashsrivastva" target="_blank"
+          class="font-bold hover:text-accent transition-colors">Shreyash Srivastva</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function projects() {
+      return {
+        dark: false,
+        scrolled: false,
+        mobileMenu: false,
+        allProducts: [
+          {
+            id: 1,
+            title: 'TMT Rod',
+            link: 'tmt.html',
+            desc: 'Thermo mechanically treated rebars for construction and infrastructure.',
+            includes: 'All standard TMT rod sizes',
+            img: 'photos/tmt.jpg'
+          },
+          {
+            id: 2,
+            title: 'MS Structures',
+            link: 'ms-structures.html',
+            desc: 'Structural mild steel sections and plates for fabrication.',
+            includes: 'Angles, Channels, I Beam, H Beam, Plates (HR, CR, GI)',
+            img: 'photos/3.avif'
+          },
+          {
+            id: 3,
+            title: 'Stainless Steel Products',
+            link: 'stainless-steel.html',
+            desc: 'Complete stainless range in SS 304 and SS 316 grades.',
+            includes: 'SS 304 and SS 316 bars, pipes, sheets and wire rod',
+            img: 'photos/steelmetal.png'
+          },
+          {
+            id: 4,
+            title: 'Fasteners Products',
+            link: 'fasteners.html',
+            desc: 'Fasteners in mild steel, high tensile and stainless grades.',
+            includes: 'MS, HT, SS 304 and SS 316 bolts, nuts, washers and screws',
+            img: 'img/bolt.jpg'
+          },
+          {
+            id: 5,
+            title: 'Aluminium Products',
+            link: 'aluminium.html',
+            desc: 'Aluminium bars, pipes and sheets up to 400mm diameter.',
+            includes: '6063, 6082, HE9, HE30, 6061 bars, pipes and sheets',
+            img: 'img/alumna.png'
+          },
+          {
+            id: 6,
+            title: 'Mild Steel Products',
+            link: 'mild-steel.html',
+            desc: 'Mild steel bars up to 500mm and pipes up to 300mm.',
+            includes: 'IS 2062, SA 36, SA 105, SA 350 bars, YST 210 and 310 pipes',
+            img: 'photos/ms-rod.jpg'
+          },
+          {
+            id: 7,
+            title: 'Alloy Steel Products',
+            link: 'alloy-steel.html',
+            desc: 'Engineering alloy steel round bars up to 400mm diameter.',
+            includes: 'EN8, EN9, EN19, EN24, EN31, EN353, W.P.S.',
+            img: 'photos/round-bar.avif'
+          },
+          {
+            id: 8,
+            title: 'Special Grade',
+            link: 'special-grade.html',
+            desc: 'Nickel alloys, duplex and super duplex in black and bright bar.',
+            includes: 'Hastelloy, Inconel, Monel, Nickel, Nimonic, Duplex',
+            img: 'img/alloy.png'
+          },
+          {
+            id: 9,
+            title: 'Precision Drawing Components',
+            link: 'precision-drawing.html',
+            desc: 'All types of drawing items across all grades, made as per customer drawings and finish requirements.',
+            includes: 'SS, Brass, Mild Steel, Titanium and custom alloys, made to your drawing',
+            img: 'photos/lathe.avif'
+          }
+        ],
+
+        init() {
+          this.dark = localStorage.getItem('theme') === 'dark'
+            || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+          window.addEventListener('scroll', () => {
+            this.scrolled = window.scrollY > 20;
+          }, { passive: true });
+
+          this.$nextTick(() => {
+            const obs = new IntersectionObserver(entries => {
+              entries.forEach(e => {
+                if (e.isIntersecting) {
+                  e.target.classList.add('visible');
+                  obs.unobserve(e.target);
+                }
+              });
+            }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+            document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+          });
+        }
+      }
+    }
+
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>
