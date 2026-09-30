@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en"
+  x-data="{dark:localStorage.getItem('theme')==='dark'||(!localStorage.getItem('theme')&&window.matchMedia('(prefers-color-scheme: dark)').matches),scrolled:false,mobileMenu:false,progress:0}"
+  :class="{'dark':dark}"
+  x-init="$watch('dark',v=>localStorage.setItem('theme',v?'dark':'light'));window.addEventListener('scroll',()=>{scrolled=window.scrollY>20;progress=Math.min(100,Math.round((window.scrollY/(document.body.scrollHeight-window.innerHeight))*100))},{passive:true});"
+  class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png"
+    href="data:image/png;base64,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">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Mild Steel Products from B. M. Industrial Works. Mild steel bars up to 500mm and pipes up to 300mm in standard structural and pressure grades for everyday engineering ne" />
+  <meta name="author" content="Shreyash Srivastva" />
+  <title>Mild Steel Products | B. M. Industrial Works</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap"
+    rel="stylesheet" />
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { display: ['PT Sans', 'sans-serif'], body: ['DM Sans', 'sans-serif'] }, colors: { accent: '#FF6B2B', 'accent-light': '#FF8F5C' } } } }</script>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box
+    }
+
+    html {
+      font-family: 'DM Sans', sans-serif
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'PT Sans', sans-serif
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #FF6B2B;
+      border-radius: 99px
+    }
+
+    body {
+      transition: background-color .3s, color .3s
+    }
+
+    .nav-link {
+      position: relative
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: currentColor;
+      transition: width .25s
+    }
+
+    .nav-link:hover::after {
+      width: 100%
+    }
+
+    .btn-primary {
+      position: relative;
+      overflow: hidden
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: rgba(255, 255, 255, .18);
+      transform: skewX(-20deg);
+      transition: left .4s
+    }
+
+    .btn-primary:hover::after {
+      left: 160%
+    }
+
+    [x-cloak] {
+      display: none !important
+    }
+
+    .photo-frame {
+      position: relative;
+      overflow: hidden;
+      background: #e4e4e7
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: #FF6B2B;
+      z-index: 100;
+      transition: width .1s linear
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .55s cubic-bezier(.4, 0, .2, 1), transform .55s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none
+    }
+
+    .d1 {
+      transition-delay: .07s
+    }
+
+    .d2 {
+      transition-delay: .14s
+    }
+
+    .prose-cs h2 {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      margin: 2.75rem 0 1rem;
+      line-height: 1.25
+    }
+
+    .prose-cs h3 {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 2rem 0 .6rem;
+      color: #FF6B2B
+    }
+
+    .prose-cs p {
+      margin: 0 0 1.4rem;
+      line-height: 1.82;
+      color: #52525b
+    }
+
+    .dark .prose-cs p {
+      color: #a1a1aa
+    }
+
+    .prose-cs ul {
+      margin: 0 0 1.4rem 1.5rem;
+      list-style: disc
+    }
+
+    .prose-cs li {
+      margin-bottom: .45rem;
+      line-height: 1.7;
+      color: #52525b
+    }
+
+    .dark .prose-cs li {
+      color: #a1a1aa
+    }
+
+    .prose-cs blockquote {
+      border-left: 3px solid #FF6B2B;
+      padding: .75rem 1.25rem;
+      margin: 0 0 1.8rem;
+      background: #fff7f4;
+      border-radius: 0 8px 8px 0
+    }
+
+    .dark .prose-cs blockquote {
+      background: #27272a
+    }
+
+    .prose-cs blockquote p {
+      margin: 0;
+      font-style: italic
+    }
+
+    .stat-card {
+      border-left: 3px solid #FF6B2B
+    }
+
+    .img-caption {
+      font-size: .8rem;
+      color: #a1a1aa;
+      text-align: center;
+      margin-top: .6rem
+    }
+
+    .card-h {
+      transition: transform .28s cubic-bezier(.4, 0, .2, 1), border-color .18s
+    }
+
+    .card-h:hover {
+      transform: translateY(-4px)
+    }
+  </style>
+</head>
+
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-body antialiased">
+  <div class="progress-bar" :style="`width:${progress}%`" role="progressbar" aria-label="Reading progress"></div>
+  <header class="fixed top-0 left-0 right-0 z-40 transition-all duration-300"
+    :class="scrolled?'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-black/5':'bg-transparent'">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="font-display font-bold text-xl tracking-tight z-10">
+        <span class="text-zinc-900 dark:text-white">B</span><span class="text-accent">M</span>
+      </a>
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <li><a href="index.html#hero"
+            class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Home</a>
+        </li>
+        <li><a href="index.html#about"
+            class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">About</a>
+        </li>
+        <li><a href="products.html" class="nav-link text-accent">Products</a>
+        </li>
+        <li><a href="brochure.html" target="_blank"
+            class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Brochure</a>
+        </li>
+        <li><a href="index.html#contact"
+            class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</a>
+        </li>
+      </ul>
+      <div class="flex items-center gap-3">
+        <button @click="dark=!dark;localStorage.setItem('theme',dark?'dark':'light')"
+          class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+          :aria-label="dark?'Light mode':'Dark mode'">
+          <svg x-show="!dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+          </svg>
+          <svg x-show="dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+          </svg>
+        </button>
+        <a href="index.html#contact"
+          class="hidden md:inline-flex items-center gap-2 btn-primary bg-accent text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-accent-light transition-colors">Call
+          &rarr;</a>
+        <button @click="mobileMenu=!mobileMenu"
+          class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800"
+          aria-label="Toggle menu">
+          <svg x-show="!mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg x-show="mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+    <div x-show="mobileMenu" x-cloak x-transition:enter="transition ease-out duration-200"
+      x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+      x-transition:leave-end="opacity-0 -translate-y-2"
+      class="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
+      <ul class="flex flex-col px-6 py-4 gap-4 text-sm font-medium">
+        <li><a href="index.html#hero" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Home</a>
+        </li>
+        <li><a href="index.html#about" @click="mobileMenu=false"
+            class="block text-zinc-700 dark:text-zinc-300">About</a></li>
+        <li><a href="products.html" @click="mobileMenu=false"
+            class="block text-zinc-700 dark:text-zinc-300">Products</a></li>
+        <li><a href="brochure.html" target="_blank" @click="mobileMenu=false"
+            class="block text-zinc-700 dark:text-zinc-300">Brochure</a></li>
+        <li><a href="index.html#contact" @click="mobileMenu=false"
+            class="block text-zinc-700 dark:text-zinc-300">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+  <main>
+    <article>
+      <header class="pt-32 pb-10 max-w-5xl mx-auto px-6">
+        <a href="products.html"
+          class="inline-flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 hover:text-accent transition-colors mb-8">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+          </svg>
+          Back to products
+        </a>
+        <div class="flex flex-wrap items-center gap-2 mb-6"><span
+            class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1.5 rounded-full">IS
+            2062</span><span
+            class="text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1.5 rounded-full">SA
+            105</span><span
+            class="text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1.5 rounded-full">Bars
+            and Pipes</span></div>
+        <h1
+          class="reveal font-display font-bold text-4xl md:text-5xl lg:text-6xl text-zinc-900 dark:text-white leading-tight mb-6">
+          Mild Steel Products</h1>
+        <p class="reveal d1 text-xl text-zinc-500 dark:text-zinc-400 leading-relaxed mb-10 max-w-2xl">Mild steel bars up
+          to 500mm and pipes up to 300mm in standard structural and pressure grades for everyday engineering needs.</p>
+        <div
+          class="reveal d2 grid grid-cols-2 md:grid-cols-4 gap-4 py-8 border-t border-b border-zinc-100 dark:border-zinc-900">
+          <div>
+            <p class="text-xs text-zinc-400 uppercase tracking-widest mb-1">Bar grades</p>
+            <p class="font-medium text-zinc-900 dark:text-white text-sm">IS 2062, SA 36, SA 105, SA 350</p>
+          </div>
+          <div>
+            <p class="text-xs text-zinc-400 uppercase tracking-widest mb-1">Pipe grades</p>
+            <p class="font-medium text-zinc-900 dark:text-white text-sm">YST 210, YST 310</p>
+          </div>
+          <div>
+            <p class="text-xs text-zinc-400 uppercase tracking-widest mb-1">Bar size</p>
+            <p class="font-medium text-zinc-900 dark:text-white text-sm">Up to 500mm</p>
+          </div>
+          <div>
+            <p class="text-xs text-zinc-400 uppercase tracking-widest mb-1">Pipe size</p>
+            <p class="font-medium text-zinc-900 dark:text-white text-sm">Up to 300mm</p>
+          </div>
+        </div>
+      </header>
+      <div class="max-w-5xl mx-auto px-6 mb-16">
+        <div class="reveal photo-frame w-full h-72 md:h-[480px] rounded-3xl"><img src="photos/ms-rod.jpg"
+            alt="Mild Steel Products" loading="eager"
+            onerror="this.src='https://placehold.co/1200x600/27272a/ffffff?text=BM+Industrial'" /></div>
+      </div>
+      <div class="max-w-5xl mx-auto px-6 mb-16">
+        <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="stat-card bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-5 pl-6">
+            <p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">4</p>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1 leading-snug">Bar grades</p>
+          </div>
+          <div class="stat-card bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-5 pl-6">
+            <p class="font-display font-bold text-3xl text-accent">2</p>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1 leading-snug">Pipe grades</p>
+          </div>
+          <div class="stat-card bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-5 pl-6">
+            <p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">500mm</p>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1 leading-snug">Bar diameter limit</p>
+          </div>
+          <div class="stat-card bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-5 pl-6">
+            <p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">300mm</p>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1 leading-snug">Pipe size limit</p>
+          </div>
+        </div>
+      </div>
+      <div class="max-w-5xl mx-auto px-6 pb-4 prose-cs">
+        <h2>Overview</h2>
+        <p>Mild steel is the most used engineering metal because it is strong, easy to weld and economical. Bars are
+          used for shafts, pins and machined parts while pipes carry fluids or form structural frames.</p>
+        <p>We stock the common structural grade IS 2062 along with SA 36, SA 105 and SA 350 for jobs that call for an
+          ASTM style specification.</p>
+      </div>
+      <div class="max-w-5xl mx-auto px-6 mb-12">
+        <div class="reveal photo-frame w-full h-56 md:h-80 rounded-2xl"><img src="img/sheets.png"
+            alt="Mild Steel Products stock" loading="lazy"
+            onerror="this.src='https://placehold.co/1200x600/27272a/ffffff?text=BM+Industrial'" /></div>
+        <p class="img-caption">Mild steel plates with the promise of ultimate strength.</p>
+      </div>
+      <div class="max-w-5xl mx-auto px-6 pb-4 prose-cs">
+        <h2>Available range</h2>
+        <p>Everything listed below is supplied from stock or on order. Tell us the grade, size and quantity you need and
+          we will confirm availability.</p>
+      </div>
+      <div class="max-w-5xl mx-auto px-6 mb-12">
+        <div class="reveal grid md:grid-cols-2 gap-5">
+          <div class="bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-7 border border-zinc-100 dark:border-zinc-800">
+            <h3 class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-1">Bars up to 500mm</h3>
+            <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-4">Grades IS 2062, SA 36, SA 105, SA 350</p>
+            <div class="flex flex-wrap gap-2"><span
+                class="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-full">Round
+                Bar</span><span
+                class="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-full">Hex
+                Bar</span><span
+                class="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-full">Square
+                Bar</span><span
+                class="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-full">Flat
+                Bar</span></div>
+          </div>
+          <div class="bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-7 border border-zinc-100 dark:border-zinc-800">
+            <h3 class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-1">Pipes up to 300mm</h3>
+            <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-4">Grades YST 210 and YST 310</p>
+            <div class="flex flex-wrap gap-2"><span
+                class="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-full">Round
+                Pipe</span><span
+                class="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-full">Square
+                Pipe</span><span
+                class="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-full">Rectangular
+                Pipe</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="max-w-5xl mx-auto px-6 pb-4 prose-cs">
+        <h2>Grade notes</h2>
+        <ul>
+          <li>IS 2062 is the standard structural steel used in fabrication and construction</li>
+          <li>SA 36 is a general purpose structural carbon steel</li>
+          <li>SA 105 is a forged carbon steel grade used for piping components</li>
+          <li>SA 350 is used where impact strength at low temperature is needed</li>
+          <li>YST pipes are used for structures, poles, furniture and general tubing</li>
+        </ul>
+      </div>
+      <div class="max-w-5xl mx-auto px-6 mb-12">
+        <div class="reveal grid md:grid-cols-2 gap-4">
+          <div>
+            <div class="photo-frame w-full h-52 rounded-2xl"><img src="img/bmkrodms.png" alt="Bars" loading="lazy"
+                onerror="this.src='https://placehold.co/700x400/27272a/ffffff?text=BM+Industrial'" /></div>
+            <p class="img-caption">Bars: Round, hex, square and flat bar up to 500mm</p>
+          </div>
+          <div>
+            <div class="photo-frame w-full h-52 rounded-2xl">
+              <img src="img/angles.png" alt="MS Angles" loading="lazy"
+                onerror="this.src='https://placehold.co/700x400/27272a/ffffff?text=MS+Angles'" />
+            </div>
+            <p class="img-caption">Angles: Equal and unequal angles in various sizes</p>
+          </div>
+
+          <div>
+            <div class="photo-frame w-full h-52 rounded-2xl">
+              <img src="img/channel.png" alt="MS Channel" loading="lazy"
+                onerror="this.src='https://placehold.co/700x400/27272a/ffffff?text=MS+Channel'" />
+            </div>
+            <p class="img-caption">Channel: Structural channels in various sizes and specifications</p>
+          </div>
+          <div>
+            <div class="photo-frame w-full h-52 rounded-2xl"><img src="img/pipe-ji.png" alt="Pipes" loading="lazy"
+                onerror="this.src='https://placehold.co/700x400/27272a/ffffff?text=BM+Industrial'" /></div>
+            <p class="img-caption">Pipes: Round, square and rectangular pipe up to 300mm</p>
+          </div>
+        </div>
+      </div>
+      <div class="max-w-5xl mx-auto px-6 pb-4 prose-cs">
+        <h2>Where it is used</h2>
+      </div>
+      <div class="max-w-5xl mx-auto px-6 mb-12">
+        <div class="reveal grid sm:grid-cols-2 gap-3">
+          <div
+            class="flex items-center gap-3 bg-zinc-50 dark:bg-zinc-900 rounded-xl p-4 border border-zinc-100 dark:border-zinc-800">
+            <svg class="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg><span class="text-sm text-zinc-700 dark:text-zinc-300">Shafts, pins and machined parts</span></div>
+          <div
+            class="flex items-center gap-3 bg-zinc-50 dark:bg-zinc-900 rounded-xl p-4 border border-zinc-100 dark:border-zinc-800">
+            <svg class="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg><span class="text-sm text-zinc-700 dark:text-zinc-300">Structural frames and supports</span></div>
+          <div
+            class="flex items-center gap-3 bg-zinc-50 dark:bg-zinc-900 rounded-xl p-4 border border-zinc-100 dark:border-zinc-800">
+            <svg class="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg><span class="text-sm text-zinc-700 dark:text-zinc-300">Flanges and piping components</span></div>
+          <div
+            class="flex items-center gap-3 bg-zinc-50 dark:bg-zinc-900 rounded-xl p-4 border border-zinc-100 dark:border-zinc-800">
+            <svg class="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg><span class="text-sm text-zinc-700 dark:text-zinc-300">Agricultural and vehicle parts</span></div>
+          <div
+            class="flex items-center gap-3 bg-zinc-50 dark:bg-zinc-900 rounded-xl p-4 border border-zinc-100 dark:border-zinc-800">
+            <svg class="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg><span class="text-sm text-zinc-700 dark:text-zinc-300">Furniture and general tubing</span></div>
+        </div>
+      </div>
+      <div class="max-w-5xl mx-auto px-6 pb-16 prose-cs">
+        <h2>How to enquire</h2>
+        <p>Send us the following and we will reply with availability and pricing: grade, shape, size, length and
+          quantity.</p>
+        <blockquote>
+          <p>Not sure which grade fits your job? Describe the application and we will help you choose.</p>
+        </blockquote>
+        <p><a href="index.html#contact" style="color:#FF6B2B">Contact us</a> or return to the <a
+            href="products.html">full product range</a>.</p>
+      </div>
+    </article>
+    <section class="bg-zinc-50 dark:bg-zinc-900/50 py-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="font-display font-bold text-2xl text-zinc-900 dark:text-white">More products</h2><a
+            href="products.html" class="text-sm font-medium text-accent nav-link hidden md:block">View all &rarr;</a>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6"><a href="alloy-steel.html"
+            class="reveal card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 hover:border-accent flex flex-col">
+            <div class="photo-frame w-full h-44"><img src="photos/round-bar.avif" alt="Alloy Steel Products"
+                loading="lazy" onerror="this.src='https://placehold.co/700x400/27272a/ffffff?text=BM+Industrial'" />
+            </div>
+            <div class="p-5">
+              <h3
+                class="font-display font-bold text-base text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors">
+                Alloy Steel Products</h3><span class="text-sm font-medium text-accent">View range &rarr;</span>
+            </div>
+          </a><a href="special-grade.html"
+            class="reveal card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 hover:border-accent flex flex-col">
+            <div class="photo-frame w-full h-44"><img src="photos/alloy.png" alt="Special Grade" loading="lazy"
+                onerror="this.src='https://placehold.co/700x400/27272a/ffffff?text=BM+Industrial'" /></div>
+            <div class="p-5">
+              <h3
+                class="font-display font-bold text-base text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors">
+                Special Grade</h3><span class="text-sm font-medium text-accent">View range &rarr;</span>
+            </div>
+          </a><a href="tmt.html"
+            class="reveal card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 hover:border-accent flex flex-col">
+            <div class="photo-frame w-full h-44"><img src="photos/tmt.jpg" alt="TMT Rod" loading="lazy"
+                onerror="this.src='https://placehold.co/700x400/27272a/ffffff?text=BM+Industrial'" /></div>
+            <div class="p-5">
+              <h3
+                class="font-display font-bold text-base text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors">
+                TMT Rod</h3><span class="text-sm font-medium text-accent">View range &rarr;</span>
+            </div>
+          </a></div>
+      </div>
+    </section>
+    <section class="py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <template x-for="(p, i) in allProducts" :key="p.id">
+            <a :href="p.link"
+              class="reveal project-card group rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-accent flex flex-col">
+              <div class="photo-frame w-full h-44 relative">
+                <img :src="p.img" :alt="p.title" loading="lazy"
+                  class="group-hover:scale-105 transition-transform duration-500"
+                  onerror="this.src='https://placehold.co/600x400/27272a/ffffff?text=BM+Industrial'" />
+                <span
+                  class="absolute top-3 left-3 text-xs font-semibold bg-white/90 dark:bg-zinc-900/90 text-zinc-900 dark:text-white px-2.5 py-1 rounded-md"
+                  x-text="String(i + 1).padStart(2, '0')"></span>
+              </div>
+              <div class="p-5 flex flex-col flex-1">
+                <h3
+                  class="font-display font-bold text-lg text-zinc-900 dark:text-white group-hover:text-accent transition-colors mb-2"
+                  x-text="p.title"></h3>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed line-clamp-2 mb-4" x-text="p.desc">
+                </p>
+                <div class="mt-auto pt-4 border-t border-zinc-100 dark:border-zinc-800">
+                  <span class="block text-[11px] uppercase tracking-wider text-zinc-400 mb-1">Includes</span>
+                  <p class="text-sm text-zinc-700 dark:text-zinc-300 leading-snug line-clamp-2 min-h-[2.5rem]"
+                    x-text="p.includes"></p>
+                </div>
+              </div>
+              <div
+                class="px-5 py-3.5 bg-zinc-50 dark:bg-zinc-800/50 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-sm font-semibold text-accent">
+                <span>View range</span>
+                <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+              </div>
+            </a>
+          </template>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="border-t border-zinc-100 dark:border-zinc-900">
+    <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-zinc-400">© <span id="yr"></span> B. M. Industrial Works. All rights reserved. <br>
+        Developed by <a href="https://linkedin.com/in/shreyashsrivastva" target="_blank"
+          class="font-bold hover:text-accent transition-colors">Shreyash Srivastva</a></p>
+    </div>
+  </footer>
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: .08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+
+</html>
