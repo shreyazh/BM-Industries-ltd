@@ -241,6 +241,44 @@
     [x-cloak] {
       display: none !important
     }
+
+    /* enquiry form fields (always on the dark card) */
+    .field {
+      width: 100%;
+      background: #27272a;
+      border: 1px solid #3f3f46;
+      color: #fff;
+      font-size: .875rem;
+      border-radius: 12px;
+      padding: .75rem 1rem;
+      outline: none;
+      transition: border-color .2s
+    }
+
+    .field::placeholder {
+      color: #52525b
+    }
+
+    .field:focus {
+      border-color: #FF6B2B
+    }
+
+    select.field {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a1a1aa'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right .9rem center;
+      background-size: 1rem;
+      padding-right: 2.5rem
+    }
+
+    .lbl {
+      display: block;
+      font-size: .75rem;
+      font-weight: 500;
+      color: #a1a1aa;
+      margin-bottom: .375rem
+    }
   </style>
 </head>
 
@@ -379,7 +417,7 @@
                 <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Tons Monthly Capacity</p>
               </div>
               <div>
-                <p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">12+</p>
+                <p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">100+</p>
                 <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Product Categories</p>
               </div>
               <div>
@@ -476,9 +514,13 @@
                   d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2" />
               </svg>
             </div>
-            <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-3">Wide Fastener Range</h3>
-            <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">B7/B7M, 2H, SS grades, Hex Bolt, Allen
-              Cap</p>
+            <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-3">
+              Round Bars, Pipes & Sheets
+            </h3>
+            <p class="text-sm text-zinc-400 leading-relaxed">
+              Wide range of round bars, pipes, sheets and plates manufactured in MS, SS, Duplex, Inconel and other
+              specialty alloys, best for industrial application.
+            </p>
           </article>
 
           <article
@@ -490,9 +532,13 @@
                   d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
               </svg>
             </div>
-            <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-3">Round Bars, Pipes & Sheets
+            <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-3">
+              Round Bars, Pipes & Sheets
             </h3>
-            <p class="text-sm text-zinc-400 leading-relaxed">MS, SS, Duplex, Inconel</p>
+            <p class="text-sm text-zinc-400 leading-relaxed">
+              Comprehensive range of round bars, pipes, sheets and plates available in MS, SS, Duplex, Inconel and other
+              high-performance alloys.
+            </p>
           </article>
 
           <article
@@ -506,8 +552,12 @@
                   d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
               </svg>
             </div>
-            <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-3">TMT Bars</h3>
-            <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Construction-grade reinforcement bars
+            <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-3">
+              TMT Bars
+            </h3>
+            <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+              High-strength, construction-grade TMT reinforcement bars designed for superior strength, flexibility,
+              durability and reliable performance.
             </p>
           </article>
 
@@ -585,8 +635,8 @@
 
     <!-- ═══ CONTACT ═══ -->
     <section id="contact" class="py-24">
-      <div class="max-w-3xl mx-auto px-5">
-        <div class="bg-zinc-900 dark:bg-zinc-800 rounded-3xl p-10 md:p-16 relative overflow-hidden">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="bg-zinc-900 dark:bg-zinc-800 rounded-3xl p-8 md:p-14 relative overflow-hidden">
           <div class="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl pointer-events-none"
             aria-hidden="true"></div>
           <div class="absolute bottom-0 left-0 w-40 h-40 bg-accent/10 rounded-full blur-2xl pointer-events-none"
@@ -602,73 +652,204 @@
                 nuts, and raw materials. Reach out for bulk orders, pricing or technical specifications.
                 <br><strong>GST: <span style="color: rgb(255, 106, 0);">24AAUFB2590A1ZM</span></strong>
               </p>
+
+              <div class="reveal d3 flex flex-col gap-4">
+                <a href="mailto:bmindustrialworks@gmail.com"
+                  class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+                  <span
+                    class="w-9 h-9 flex items-center justify-center bg-zinc-800 dark:bg-zinc-700 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0"><svg
+                      class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg></span>
+                  <span class="text-sm">bmindustrialworks@gmail.com</span>
+                </a>
+                <a href="tel:+917600636894"
+                  class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+                  <span
+                    class="w-9 h-9 flex items-center justify-center bg-zinc-800 dark:bg-zinc-700 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0"><svg
+                      class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg></span>
+                  <span class="text-sm">Kirtan Shah — 7600636894</span>
+                </a>
+                <a href="tel:+918955220178"
+                  class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+                  <span
+                    class="w-9 h-9 flex items-center justify-center bg-zinc-800 dark:bg-zinc-700 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0"><svg
+                      class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg></span>
+                  <span class="text-sm">Ramsagar Birla — 8955220178</span>
+                </a>
+                <a href="https://wa.me/918955220178" rel="noopener noreferrer" target="_blank"
+                  class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+                  <span
+                    class="w-9 h-9 flex items-center justify-center bg-zinc-800 dark:bg-zinc-700 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0"><svg
+                      class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 10h8M8 14h5m-9 7l1.6-4.4A8 8 0 1112 20a8 8 0 01-3.6-.9L4 21z" />
+                    </svg></span>
+                  <span class="text-sm">Chat on WhatsApp</span>
+                </a>
+                <a href="https://www.google.com/maps/dir//B.+M.+INDUSTRIAL+WORKS,+BHAGIRATH+INDUSTRIAL+ESTATE+-4,+E-54,+Industrial+Area,+Amraiwadi,+Ahmedabad,+Gujarat+380026/@26.8763136,80.9828352"
+                  target="_blank" rel="noopener noreferrer"
+                  class="group flex items-start gap-3 text-zinc-400 hover:text-white transition-colors">
+                  <span
+                    class="w-9 h-9 flex items-center justify-center bg-zinc-800 dark:bg-zinc-700 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0"><svg
+                      class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg></span>
+                  <span class="text-sm">E/54, Bhagirath-IV Ind. Estate, Simplex Rubber Product Compound, Opp.
+                    Jawaharnagar, Amraiwadi, Ahmedabad-380026</span>
+                </a>
+              </div>
             </div>
 
             <div class="reveal d2">
-              <div class="flex flex-col gap-4">
-                <div class="reveal d3 flex flex-col gap-4">
-                  <a href="mailto:bmindustrialworks@gmail.com"
-                    class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
-                    <span
-                      class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0">
-                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    </span>
-                    <span class="text-sm">bmindustrialworks@gmail.com</span>
-                  </a>
-                  <a href="tel:+917600636894"
-                    class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
-                    <span
-                      class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0">
-                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                    </span>
-                    <span class="text-sm">Kirtan Shah — 7600636894</span>
-                  </a>
-                  <a href="tel:+918955220178"
-                    class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
-                    <span
-                      class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0">
-                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                    </span>
-                    <span class="text-sm">Ramsagar Birla — 8955220178</span>
-                  </a>
-                  <!-- <a href="http://www.bm-industries.com" rel="noopener noreferrer" target="_blank" class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
-              <span class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 100-18 9 9 0 000 18zM3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 014 9 15 15 0 01-4 9 15 15 0 01-4-9 15 15 0 014-9z"/></svg>
-              </span>
-              <span class="text-sm">www.bm-industries.com</span>
-            </a> -->
-                  <div class="group flex items-start gap-3 text-zinc-400">
-                    <span
-                      class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg transition-colors shrink-0">
-                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                    </span>
-                    <span class="text-sm"><a
-                        href="https://www.google.com/maps/dir//B.+M.+INDUSTRIAL+WORKS,+BHAGIRATH+INDUSTRIAL+ESTATE+-4,+E-54,+Industrial+Area,+Amraiwadi,+Ahmedabad,+Gujarat+380026/@26.8763136,80.9828352"
-                        target="_blank" class="hover:underline">E/54, Bhagirath-IV Ind. Estate, Simplex Rubber Product
-                        Compound, Opp. Jawaharnagar, Amraiwadi, Ahmedabad-380026</a></span>
+              <form id="enquiry" novalidate>
+                <div class="flex flex-col gap-4">
+                  <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label for="name" class="lbl">Name <span aria-hidden="true">*</span></label>
+                      <input class="field" type="text" id="name" name="name" placeholder="Your name" required
+                        autocomplete="name">
+                    </div>
+                    <div>
+                      <label for="phone" class="lbl">Phone <span aria-hidden="true">*</span></label>
+                      <input class="field" type="tel" id="phone" name="phone" placeholder="+91 ..." required
+                        autocomplete="tel">
+                    </div>
                   </div>
 
+                  <div>
+                    <label for="email" class="lbl">Email</label>
+                    <input class="field" type="email" id="email" name="email" placeholder="you@company.com"
+                      autocomplete="email">
+                  </div>
+
+                  <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label for="material" class="lbl">Product / Material <span aria-hidden="true">*</span></label>
+                      <select class="field" id="material" name="material" required>
+                        <option value="">Select</option>
+                        <option>Fasteners</option>
+                        <option>Stud Bolts</option>
+                        <option>Nuts</option>
+                        <option>Mild Steel</option>
+                        <option>Alloy Steel</option>
+                        <option>Special Grade</option>
+                        <option>Aluminium</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="grade" class="lbl">Grade</label>
+                      <input class="field" type="text" id="grade" name="grade" placeholder="e.g. EN8, 6061">
+                    </div>
+                  </div>
+
+                  <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label for="shape" class="lbl">Shape</label>
+                      <select class="field" id="shape" name="shape">
+                        <option value="">Select</option>
+                        <option>Round Bar</option>
+                        <option>Square Bar</option>
+                        <option>Hex Bar</option>
+                        <option>Flat Bar</option>
+                        <option>Pipe</option>
+                        <option>Sheet</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="size" class="lbl">Size</label>
+                      <input class="field" type="text" id="size" name="size" placeholder="e.g. 50mm dia">
+                    </div>
+                  </div>
+
+                  <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label for="temper" class="lbl">Temper</label>
+                      <input class="field" type="text" id="temper" name="temper" placeholder="e.g. T6">
+                    </div>
+                    <div>
+                      <label for="qty" class="lbl">Quantity</label>
+                      <input class="field" type="text" id="qty" name="qty" placeholder="e.g. 500 kg">
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="notes" class="lbl">Message</label>
+                    <textarea class="field resize-none" id="notes" name="notes" rows="3"
+                      placeholder="Tell us about the application..."></textarea>
+                  </div>
+
+                  <p id="err" class="text-sm text-red-400 hidden" role="alert"></p>
+
+                  <div class="flex flex-col sm:flex-row gap-3">
+                    <button type="submit" data-via="whatsapp"
+                      class="shimmer flex-1 bg-accent text-white font-display font-bold text-sm py-3.5 rounded-xl hover:bg-accent-light transition-colors">Send
+                      on WhatsApp →</button>
+                    <button type="submit" data-via="email"
+                      class="flex-1 border border-zinc-600 text-zinc-300 font-display font-bold text-sm py-3.5 rounded-xl hover:border-accent hover:text-white transition-colors">Send
+                      by email</button>
+                  </div>
                 </div>
-              </div>
+              </form>
             </div>
 
           </div>
         </div>
       </div>
+
+      <script>
+          (function () {
+            // ---- EDIT THESE ----
+            const WHATSAPP_NUMBER = '918955220178'; // country code + number, no + or spaces
+            const EMAIL_TO = 'bmindustrialworks@gmail.com';
+            // --------------------
+
+            const form = document.getElementById('enquiry');
+            const err = document.getElementById('err');
+            let via = 'whatsapp';
+            form.querySelectorAll('button[type=submit]').forEach(b => b.addEventListener('click', () => via = b.dataset.via));
+
+            // Pre-select from ?product=aluminium etc.
+            const q = new URLSearchParams(location.search).get('product');
+            const map = { 'mild-steel': 'Mild Steel', 'alloy-steel': 'Alloy Steel', 'special-grade': 'Special Grade', 'aluminium': 'Aluminium', 'fasteners': 'Fasteners', 'stud-bolts': 'Stud Bolts', 'nuts': 'Nuts' };
+            if (q && map[q]) form.material.value = map[q];
+
+            form.addEventListener('submit', e => {
+              e.preventDefault();
+              const f = Object.fromEntries(new FormData(form));
+              if (!f.name.trim() || !f.phone.trim() || !f.material) {
+                err.textContent = 'Please fill in your name, phone and product.';
+                err.classList.remove('hidden');
+                return;
+              }
+              err.classList.add('hidden');
+
+              const text = [
+                'Enquiry from website\n',
+                `Name: ${f.name}`, `Phone: ${f.phone}`, f.email && `Email: ${f.email}`,
+                `Product/Material: ${f.material}`, f.grade && `Grade: ${f.grade}`, f.shape && `Shape: ${f.shape}`,
+                f.size && `Size: ${f.size}`, f.temper && `Temper: ${f.temper}`, f.qty && `Quantity: ${f.qty}`,
+                f.notes && `Message: ${f.notes}`
+              ].filter(Boolean).join('\n');
+
+              if (via === 'email') {
+                location.href = `mailto:${EMAIL_TO}?subject=${encodeURIComponent('Enquiry: ' + f.material)}&body=${encodeURIComponent(text)}`;
+              } else {
+                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+              }
+            });
+          })();
+      </script>
     </section>
   </main>
 
